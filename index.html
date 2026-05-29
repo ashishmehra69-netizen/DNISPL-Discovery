@@ -19,88 +19,143 @@
                 radial-gradient(ellipse at 80% 80%, rgba(26,58,92,0.4) 0%, transparent 60%);
     pointer-events: none; z-index: 0;
   }
+
+  /* ── Header ── */
   .header { position: relative; z-index: 10; background: linear-gradient(135deg, var(--navy) 0%, #0f2744 100%); border-bottom: 2px solid var(--gold); }
-  .header-inner { max-width: 1000px; margin: 0 auto; padding: 36px 40px 28px; }
+  .header-inner { max-width: 1000px; margin: 0 auto; padding: 36px 40px 32px; }
   .header-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
-  .header h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 40px); color: var(--white); line-height: 1.2; margin-bottom: 10px; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: clamp(24px, 4vw, 38px); color: var(--white); line-height: 1.2; margin-bottom: 10px; }
   .header h1 span { color: var(--gold); }
-  .header-sub { color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 300; max-width: 600px; line-height: 1.6; }
-  .header-meta { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
-  .meta-chip { display: flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.7); font-size: 12px; }
-  .meta-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
-  .progress-wrap { background: rgba(255,255,255,0.06); border-top: 1px solid rgba(255,255,255,0.08); padding: 14px 40px; max-width: 1000px; margin: 0 auto; }
-  .progress-label { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); font-size: 11px; margin-bottom: 7px; }
-  .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #e8c56a); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
-  .main { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 32px 40px 80px; }
-  .client-card { background: var(--white); border-radius: 16px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 8px 40px rgba(0,0,0,0.25); border-top: 4px solid var(--gold); animation: slideUp 0.5s ease both; }
-  .client-card h2 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-  .client-card h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .header-sub { color: rgba(255,255,255,0.55); font-size: 13.5px; max-width: 580px; line-height: 1.6; margin-bottom: 28px; }
+  .header-meta { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 32px; }
+  .meta-chip { display: flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.65); font-size: 12px; }
+  .meta-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+
+  /* ── Client info panel ── */
+  .client-info-panel { background: rgba(255,255,255,0.06); border: 1px solid rgba(201,168,76,0.25); border-radius: 14px; padding: 24px 28px; }
+  .panel-title { font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .panel-title::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
+  .client-fields { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
   .field-group { display: flex; flex-direction: column; gap: 6px; }
-  label { font-size: 12px; font-weight: 600; color: var(--navy2); text-transform: uppercase; letter-spacing: 0.8px; }
-  input[type="text"], input[type="email"], select, textarea { padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: #fafbfe; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
-  input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); background: var(--white); }
+  .field-group label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.8px; }
+  .field-group input { padding: 10px 14px; border: 1.5px solid rgba(255,255,255,0.12); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--white); background: rgba(255,255,255,0.07); outline: none; transition: all 0.2s; }
+  .field-group input::placeholder { color: rgba(255,255,255,0.3); }
+  .field-group input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+
+  /* ── Progress ── */
+  .progress-wrap { background: rgba(0,0,0,0.2); border-top: 1px solid rgba(255,255,255,0.06); padding: 14px 40px; max-width: 1000px; margin: 0 auto; }
+  .progress-label { display: flex; justify-content: space-between; color: rgba(255,255,255,0.4); font-size: 11px; margin-bottom: 7px; }
+  .progress-bar { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #e8c56a); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+
+  /* ── Main ── */
+  .main { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 32px 40px 80px; }
+  .step-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+
+  /* ── Tabs ── */
   .tab-nav { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
   .tab-btn { padding: 9px 16px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
   .tab-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); color: var(--gold); }
   .tab-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 600; }
   .tab-btn.done { background: rgba(46,125,50,0.15); border-color: rgba(46,125,50,0.4); color: #4caf50; }
-  .section-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.25); display: none; animation: slideUp 0.35s ease both; }
+
+  /* ── Section card ── */
+  .section-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.3); display: none; animation: slideUp 0.35s ease both; }
   .section-card.active { display: block; }
-  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   .section-header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); padding: 24px 32px; border-bottom: 3px solid var(--gold); }
   .section-header h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 22px; margin-bottom: 4px; }
-  .section-header p { color: rgba(255,255,255,0.55); font-size: 13px; }
-  .category-divider { display: flex; align-items: center; gap: 12px; padding: 10px 32px; background: var(--ice); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .section-header p { color: rgba(255,255,255,0.5); font-size: 13px; }
+
+  /* ── Category divider ── */
+  .category-divider { display: flex; align-items: center; gap: 12px; padding: 9px 32px; background: var(--ice); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .category-divider span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy2); }
   .category-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  .question-row { padding: 20px 32px; border-bottom: 1px solid #f0f3f8; transition: background 0.15s; }
+
+  /* ── Question row ── */
+  .question-row { padding: 18px 32px; border-bottom: 1px solid #f0f3f8; transition: background 0.15s; }
   .question-row:hover { background: #fafbfe; }
   .question-row:last-child { border-bottom: none; }
-  .q-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+  .q-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .q-num { width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: var(--white); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
   .q-label { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.5; flex: 1; }
-  .q-num { width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: var(--white); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .priority-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 10px; border-radius: 12px; flex-shrink: 0; }
+  .priority-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 10px; border-radius: 12px; flex-shrink: 0; margin-top: 2px; }
   .priority-badge.high   { background: rgba(46,125,50,0.12);  color: var(--green); }
   .priority-badge.medium { background: rgba(245,127,23,0.12); color: var(--amber); }
   .priority-badge.low    { background: rgba(21,101,192,0.12); color: var(--blue);  }
-  /* Response only = full width; with priority = grid */
-  .q-fields-full { display: grid; grid-template-columns: 1fr; gap: 10px; }
-  .q-fields-split { display: grid; grid-template-columns: 1fr 160px; gap: 10px; }
-  .q-fields-full textarea, .q-fields-split textarea { resize: vertical; min-height: 60px; font-size: 13px; }
-  .q-fields-split select { font-size: 13px; }
-  .section-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px; background: #f8fafc; border-top: 1px solid var(--border); }
-  .btn { padding: 11px 24px; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+
+  /* ── Fields ── */
+  .q-fields-full  { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .q-fields-split { display: grid; grid-template-columns: 1fr 150px; gap: 10px; }
+  .q-fields-upload { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .q-fields-split-upload { display: grid; grid-template-columns: 1fr 150px; gap: 10px; }
+
+  textarea { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); background: #fafbfe; outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: vertical; min-height: 52px; width: 100%; }
+  textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); background: var(--white); }
+  select { padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); background: #fafbfe; outline: none; cursor: pointer; }
+  select:focus { border-color: var(--gold); }
+
+  /* ── Upload zone ── */
+  .upload-zone {
+    border: 2px dashed var(--border); border-radius: 10px; padding: 14px 16px;
+    background: #fafbfe; cursor: pointer; transition: all 0.2s; position: relative;
+    display: flex; align-items: center; gap: 12px; margin-top: 2px;
+  }
+  .upload-zone:hover { border-color: var(--gold); background: var(--gold-light); }
+  .upload-zone.has-files { border-color: var(--green); background: rgba(46,125,50,0.04); }
+  .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-icon { font-size: 20px; flex-shrink: 0; }
+  .upload-text { flex: 1; }
+  .upload-text .u-title { font-size: 12px; font-weight: 600; color: var(--navy2); }
+  .upload-text .u-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .upload-badge { background: var(--navy); color: var(--white); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 10px; white-space: nowrap; }
+  .file-list { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .file-chip { background: var(--ice); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px 3px 8px; font-size: 11px; color: var(--navy); display: flex; align-items: center; gap: 5px; }
+  .file-chip .remove { cursor: pointer; color: #999; font-size: 13px; line-height: 1; }
+  .file-chip .remove:hover { color: red; }
+
+  /* ── Section nav ── */
+  .section-nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 32px; background: #f8fafc; border-top: 1px solid var(--border); }
+  .btn { padding: 10px 22px; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
   .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--muted); }
   .btn-outline:hover { border-color: var(--navy2); color: var(--navy); }
   .btn-primary { background: var(--navy); color: var(--white); }
-  .btn-primary:hover { background: var(--navy2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(13,27,42,0.3); }
+  .btn-primary:hover { background: var(--navy2); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(13,27,42,0.3); }
   .btn-gold { background: var(--gold); color: var(--navy); }
-  .btn-gold:hover { background: #b8943e; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.4); }
-  .submit-card { background: var(--white); border-radius: 16px; padding: 40px; text-align: center; box-shadow: 0 8px 40px rgba(0,0,0,0.25); display: none; animation: slideUp 0.4s ease both; }
+  .btn-gold:hover { background: #b8943e; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(201,168,76,0.4); }
+
+  /* ── Submit ── */
+  .submit-card { background: var(--white); border-radius: 16px; padding: 40px; text-align: center; box-shadow: 0 8px 40px rgba(0,0,0,0.3); display: none; animation: slideUp 0.4s ease both; }
   .submit-card.active { display: block; }
   .submit-icon { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy2)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
   .submit-card h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--navy); margin-bottom: 10px; }
-  .submit-card p { color: var(--muted); font-size: 14px; max-width: 500px; margin: 0 auto 28px; line-height: 1.7; }
-  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; text-align: left; }
+  .submit-card > div > p { color: var(--muted); font-size: 14px; max-width: 500px; margin: 0 auto 28px; line-height: 1.7; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 28px; text-align: left; }
   .summary-item { background: var(--ice); border-radius: 10px; padding: 14px 16px; }
-  .summary-item .s-val { font-size: 22px; font-weight: 700; color: var(--navy); font-family: 'Playfair Display', serif; }
+  .summary-item .s-val { font-size: 20px; font-weight: 700; color: var(--navy); font-family: 'Playfair Display', serif; }
   .summary-item .s-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+  .loader { display: none; align-items: center; justify-content: center; gap: 10px; color: var(--muted); font-size: 14px; margin-bottom: 16px; flex-direction: column; }
+  .loader.show { display: flex; }
+  .loader-msg { font-size: 13px; color: var(--muted); }
+  .spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .success-state { display: none; text-align: center; padding: 20px; }
   .success-state.show { display: block; }
   .success-circle { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #2E7D32, #4caf50); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 36px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
   @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .loader { display: none; align-items: center; justify-content: center; gap: 10px; color: var(--muted); font-size: 14px; }
-  .loader.show { display: flex; }
-  .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .footer { text-align: center; color: rgba(255,255,255,0.25); font-size: 11px; padding: 24px 40px; letter-spacing: 0.5px; }
-  @media (max-width: 640px) {
-    .main { padding: 20px 16px 60px; } .header-inner { padding: 24px 20px 20px; }
-    .q-fields-split { grid-template-columns: 1fr; } .field-row { grid-template-columns: 1fr; }
-    .question-row, .section-nav { padding: 16px 20px; } .section-header { padding: 20px; } .client-card { padding: 20px; }
+
+  .footer { text-align: center; color: rgba(255,255,255,0.2); font-size: 11px; padding: 24px 40px; }
+
+  @media (max-width: 700px) {
+    .header-inner { padding: 24px 20px 24px; }
+    .client-fields { grid-template-columns: 1fr 1fr; }
+    .progress-wrap { padding: 12px 20px; }
+    .main { padding: 20px 16px 60px; }
+    .question-row, .section-nav { padding: 14px 18px; }
+    .section-header { padding: 18px 20px; }
+    .q-fields-split, .q-fields-split-upload { grid-template-columns: 1fr; }
   }
+  @media (max-width: 480px) { .client-fields { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -109,12 +164,21 @@
   <div class="header-inner">
     <div class="header-badge">Confidential Discovery Document</div>
     <h1>Client Roadmap <span>Discovery</span> Checklist</h1>
-    <p class="header-sub">Please complete all sections to help our team design the most effective IT infrastructure roadmap for your organisation.</p>
+    <p class="header-sub">Please complete all sections below to help our team design the most effective IT infrastructure roadmap for your organisation.</p>
     <div class="header-meta">
       <div class="meta-chip"><div class="dot"></div>8 Sections</div>
-      <div class="meta-chip"><div class="dot"></div>67 Questions</div>
+      <div class="meta-chip"><div class="dot"></div>77 Questions</div>
       <div class="meta-chip"><div class="dot"></div>~20 min to complete</div>
-      <div class="meta-chip"><div class="dot"></div>Responses auto-saved to Drive</div>
+      <div class="meta-chip"><div class="dot"></div>Files saved to Google Drive</div>
+    </div>
+    <div class="client-info-panel">
+      <div class="panel-title">Your Details</div>
+      <div class="client-fields">
+        <div class="field-group"><label>Company Name *</label><input type="text" id="clientName" placeholder="e.g. Acme Corporation" /></div>
+        <div class="field-group"><label>Contact Name</label><input type="text" id="contactName" placeholder="e.g. Rajesh Kumar" /></div>
+        <div class="field-group"><label>Email Address</label><input type="email" id="contactEmail" placeholder="e.g. rajesh@acme.com" /></div>
+        <div class="field-group"><label>Date</label><input type="text" id="fillDate" /></div>
+      </div>
     </div>
   </div>
   <div class="progress-wrap">
@@ -124,18 +188,7 @@
 </div>
 
 <div class="main">
-  <div class="client-card">
-    <h2>Client Information</h2>
-    <div class="field-row">
-      <div class="field-group"><label>Client / Company Name *</label><input type="text" id="clientName" placeholder="e.g. Acme Corporation" /></div>
-      <div class="field-group"><label>Primary Contact Name</label><input type="text" id="contactName" placeholder="e.g. Rajesh Kumar" /></div>
-    </div>
-    <div class="field-row">
-      <div class="field-group"><label>Email Address</label><input type="email" id="contactEmail" placeholder="e.g. rajesh@acme.com" /></div>
-      <div class="field-group"><label>Date</label><input type="text" id="fillDate" placeholder="e.g. 28 May 2026" /></div>
-    </div>
-  </div>
-
+  <div class="step-label">Step 2 of 2 — Complete all sections</div>
   <div class="tab-nav" id="tabNav"></div>
   <div id="sections"></div>
 
@@ -143,17 +196,17 @@
     <div id="formState">
       <div class="submit-icon">📋</div>
       <h2>Ready to Submit</h2>
-      <p>Thank you for completing the discovery checklist. Your responses will be saved directly to our secure Google Drive and our team will review them promptly.</p>
+      <p>Your responses and uploaded files will be saved to our secure Google Drive — organised in a dedicated folder for your company.</p>
       <div class="summary-grid" id="summaryGrid"></div>
-      <div class="loader" id="loader"><div class="spinner"></div> Submitting your responses…</div>
-      <button class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="font-size:16px; padding:14px 40px;">Submit to DNISPL Team →</button>
-      <p style="margin-top:14px; font-size:12px; color:#aaa;">All data is transmitted securely and treated as strictly confidential.</p>
+      <div class="loader" id="loader"><div class="spinner"></div><div class="loader-msg" id="loaderMsg">Submitting your responses…</div></div>
+      <button class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="font-size:15px; padding:13px 36px;">Submit to DNISPL Team →</button>
+      <p style="margin-top:12px; font-size:12px; color:#bbb;">All data is transmitted securely and treated as strictly confidential.</p>
     </div>
     <div class="success-state" id="successState">
       <div class="success-circle">✓</div>
       <h2 style="color:#2E7D32;">Successfully Submitted!</h2>
-      <p style="color:#555;">Your discovery responses have been saved to our Google Drive. Our SI team will review and reach out within 2 business days.</p>
-      <p style="font-size:13px; color:#aaa; margin-top:8px;">You may now close this window.</p>
+      <p style="color:#555; max-width:420px; margin: 0 auto;">Your responses and files have been saved to our Google Drive. Our SI team will review and reach out within 2 business days.</p>
+      <p style="font-size:12px; color:#aaa; margin-top:10px;">You may now close this window.</p>
     </div>
   </div>
 </div>
@@ -162,135 +215,186 @@
 
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhcxb1eyMVayb2cjhkRZtmB7IiOwC8woafMYMm7nwvHHS7r2lCuaypNJASo8c-0P50OQ/exec";
+const ACCEPTED  = ".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.docx,.vsd,.vsdx";
+const MAX_MB    = 10;
 
-// noPriority: true = just a text response, no dropdown (basic info questions)
+// upload:true = show file upload zone on this question
 const SECTIONS = [
   {
     id: "business", icon: "🏢", title: "Business & Strategy",
     desc: "Understand your business context, goals, and current challenges.",
     rows: [
-      { cat: "Business Overview",  item: "Company name",                  noPriority: true },
       { cat: "Business Overview",  item: "Industry vertical",             noPriority: true },
       { cat: "Business Overview",  item: "Number of locations / sites",   noPriority: true },
+      { cat: "Business Overview",  item: "Total employee count",          noPriority: true },
       { cat: "Business Overview",  item: "Growth plans (1–5 years)",      noPriority: true },
       { cat: "Business Drivers",   item: "Digital transformation goals",  priority: "high"   },
       { cat: "Business Drivers",   item: "Cost optimisation initiatives", priority: "medium" },
       { cat: "Business Drivers",   item: "Cloud migration plans",         priority: "medium" },
-      { cat: "Current Challenges", item: "Performance issues",            priority: "high"   },
+      { cat: "Current Challenges", item: "Top 3 IT pain points",          priority: "high"   },
       { cat: "Current Challenges", item: "Security concerns",             priority: "high"   },
-      { cat: "Current Challenges", item: "Legacy systems",                priority: "medium" },
+      { cat: "Current Challenges", item: "Legacy systems in use",         priority: "medium" },
     ]
   },
   {
     id: "it", icon: "🖥️", title: "IT Landscape",
     desc: "Map the existing IT environment, team structure, and documentation.",
     rows: [
-      { cat: "IT Organisation", item: "Internal IT team structure",   noPriority: true },
-      { cat: "IT Organisation", item: "Support model",                noPriority: true },
-      { cat: "IT Organisation", item: "Number of IT staff",           noPriority: true },
-      { cat: "Documentation",   item: "Network diagrams available",   priority: "medium" },
-      { cat: "Documentation",   item: "IP schema / addressing plan",  priority: "high"   },
-      { cat: "Documentation",   item: "Asset inventory",              priority: "medium" },
-      { cat: "Documentation",   item: "Change management process",    priority: "low"    },
+      { cat: "IT Organisation", item: "Internal IT team structure",        noPriority: true },
+      { cat: "IT Organisation", item: "Support model (in-house / MSP)",    noPriority: true },
+      { cat: "IT Organisation", item: "Number of IT staff",                noPriority: true },
+      { cat: "Documentation",   item: "Network diagrams",                  priority: "medium", upload: true },
+      { cat: "Documentation",   item: "IP schema / addressing plan",       priority: "high",   upload: true },
+      { cat: "Documentation",   item: "Asset inventory",                   priority: "medium", upload: true },
+      { cat: "Documentation",   item: "Change management process",         priority: "low"    },
     ]
   },
   {
     id: "network", icon: "🌐", title: "Network & SD-WAN",
-    desc: "Assess the network topology, SD-WAN needs, and DR readiness.",
+    desc: "Assess the network topology, SD-WAN needs, and connectivity.",
     rows: [
-      { cat: "LAN",             item: "Core / distribution / access topology",     priority: "high"   },
-      { cat: "LAN",             item: "VLAN design",                               priority: "high"   },
-      { cat: "LAN",             item: "QoS implementation",                        priority: "medium" },
-      { cat: "Wireless",        item: "Wi-Fi coverage issues",                     priority: "medium" },
-      { cat: "Wireless",        item: "Guest Wi-Fi requirements",                  priority: "low"    },
-      { cat: "Routing",         item: "Routing protocols in use",                  priority: "high"   },
-      { cat: "Routing",         item: "Internet breakout strategy",                priority: "medium" },
-      { cat: "SD-WAN",          item: "Application-aware routing requirements",    priority: "high"   },
-      { cat: "SD-WAN",          item: "Centralised orchestration needs",           priority: "medium" },
-      { cat: "SD-WAN",          item: "SASE integration plans",                    priority: "medium" },
-      { cat: "WAN",             item: "Number of WAN links / ISPs",                noPriority: true   },
-      { cat: "WAN",             item: "Current bandwidth per site",                noPriority: true   },
+      { cat: "LAN",     item: "Core / distribution / access topology",   priority: "high",   upload: true },
+      { cat: "LAN",     item: "VLAN design diagram",                     priority: "high",   upload: true },
+      { cat: "LAN",     item: "QoS implementation",                      priority: "medium" },
+      { cat: "Wireless",item: "Wi-Fi coverage / heatmap",                priority: "medium", upload: true },
+      { cat: "Wireless",item: "Guest Wi-Fi requirements",                priority: "low"    },
+      { cat: "Routing", item: "Routing protocols in use",                priority: "high"   },
+      { cat: "Routing", item: "Internet breakout strategy",              priority: "medium" },
+      { cat: "SD-WAN",  item: "Application-aware routing requirements",  priority: "high"   },
+      { cat: "SD-WAN",  item: "Centralised orchestration needs",         priority: "medium" },
+      { cat: "SD-WAN",  item: "SASE integration plans",                  priority: "medium" },
+      { cat: "WAN",     item: "Number of WAN links / ISPs",              noPriority: true   },
+      { cat: "WAN",     item: "Current bandwidth per site",              noPriority: true   },
     ]
   },
   {
     id: "dc", icon: "☁️", title: "Data Centre & Cloud",
     desc: "Inventory compute, storage, and cloud workloads.",
     rows: [
-      { cat: "Compute",   item: "Physical server inventory",        priority: "high"   },
-      { cat: "Compute",   item: "Hypervisor platform",              priority: "high"   },
-      { cat: "Compute",   item: "Server refresh cycle",             noPriority: true   },
-      { cat: "Storage",   item: "SAN / NAS details",                priority: "high"   },
-      { cat: "Storage",   item: "Capacity / utilisation",           priority: "medium" },
-      { cat: "Cloud",     item: "AWS / Azure / GCP usage",          priority: "high"   },
-      { cat: "Cloud",     item: "Hybrid / multi-cloud connectivity",priority: "medium" },
-      { cat: "Cloud",     item: "Cloud migration readiness",        priority: "high"   },
-      { cat: "Migration", item: "Application dependencies mapping", priority: "high"   },
-      { cat: "Migration", item: "Migration timeline expectations",  priority: "medium" },
+      { cat: "Compute",   item: "Physical server inventory",             priority: "high",   upload: true },
+      { cat: "Compute",   item: "Hypervisor platform in use",            priority: "high"   },
+      { cat: "Compute",   item: "Server refresh cycle",                  noPriority: true   },
+      { cat: "Storage",   item: "SAN / NAS details",                     priority: "high"   },
+      { cat: "Storage",   item: "Storage capacity / utilisation",        priority: "medium", upload: true },
+      { cat: "Cloud",     item: "AWS / Azure / GCP usage",               priority: "high"   },
+      { cat: "Cloud",     item: "Hybrid / multi-cloud architecture",     priority: "medium", upload: true },
+      { cat: "Cloud",     item: "Cloud migration readiness",             priority: "high"   },
+      { cat: "Migration", item: "Application dependencies mapping",      priority: "high",   upload: true },
+      { cat: "Migration", item: "Migration timeline expectations",       priority: "medium" },
     ]
   },
   {
     id: "security", icon: "🔒", title: "Security",
     desc: "Evaluate security posture, identity controls, and compliance.",
     rows: [
-      { cat: "Security Architecture", item: "Firewall vendors / models",         priority: "high"   },
-      { cat: "Security Architecture", item: "IDS / IPS deployment",              priority: "high"   },
+      { cat: "Security Architecture", item: "Firewall architecture diagram",      priority: "high",   upload: true },
+      { cat: "Security Architecture", item: "IDS / IPS deployment details",       priority: "high"   },
       { cat: "Security Architecture", item: "SOC / SIEM in place",               priority: "high"   },
-      { cat: "Identity",              item: "MFA adoption",                      priority: "high"   },
-      { cat: "Identity",              item: "SSO / IAM implementation",          priority: "high"   },
-      { cat: "Identity",              item: "Privileged access management",      priority: "medium" },
-      { cat: "Compliance",            item: "ISO / PCI / GDPR requirements",     priority: "high"   },
-      { cat: "Compliance",            item: "CERT-In compliance requirements",   priority: "high"   },
-      { cat: "Compliance",            item: "Last security audit date",          noPriority: true   },
+      { cat: "Identity",              item: "MFA adoption",                       priority: "high"   },
+      { cat: "Identity",              item: "SSO / IAM implementation",           priority: "high"   },
+      { cat: "Identity",              item: "Privileged access management",       priority: "medium" },
+      { cat: "Compliance",            item: "ISO / PCI / GDPR requirements",      priority: "high",   upload: true },
+      { cat: "Compliance",            item: "CERT-In compliance requirements",    priority: "high"   },
+      { cat: "Compliance",            item: "Last security audit report",         noPriority: true,  upload: true },
     ]
   },
   {
     id: "enduser", icon: "💼", title: "End User & Apps",
     desc: "Document end-user devices, collaboration tools, and enterprise apps.",
     rows: [
-      { cat: "End User Devices", item: "Laptop / desktop inventory count",   noPriority: true   },
-      { cat: "End User Devices", item: "MDM / UEM platform in use",          priority: "medium" },
-      { cat: "End User Devices", item: "OS standardisation (Win/Mac/Linux)", noPriority: true   },
-      { cat: "Collaboration",    item: "Collaboration platform (Teams / Zoom / Webex)", noPriority: true },
-      { cat: "Collaboration",    item: "Voice / telephony systems",          noPriority: true   },
-      { cat: "Applications",     item: "ERP / CRM / HRMS landscape",         priority: "high"   },
-      { cat: "Applications",     item: "Business-critical applications list",priority: "high"   },
-      { cat: "Applications",     item: "Custom / in-house developed apps",   priority: "medium" },
+      { cat: "End User Devices", item: "Laptop / desktop count",                    noPriority: true   },
+      { cat: "End User Devices", item: "OS standardisation (Win / Mac / Linux)",    noPriority: true   },
+      { cat: "End User Devices", item: "MDM / UEM platform in use",                 priority: "medium" },
+      { cat: "Collaboration",    item: "Collaboration platform (Teams/Zoom/Webex)", noPriority: true   },
+      { cat: "Collaboration",    item: "Voice / telephony systems",                 noPriority: true   },
+      { cat: "Applications",     item: "ERP / CRM / HRMS landscape",                priority: "high",   upload: true },
+      { cat: "Applications",     item: "Business-critical applications list",       priority: "high",   upload: true },
+      { cat: "Applications",     item: "Custom / in-house developed apps",          priority: "medium" },
     ]
   },
   {
     id: "backup", icon: "🛡️", title: "Backup, DR & Ops",
     desc: "Define recovery objectives, monitoring tools, and automation.",
     rows: [
-      { cat: "Backup",           item: "Backup vendors / tools in use",   noPriority: true   },
-      { cat: "Backup",           item: "Immutable / offsite backups",      priority: "high"   },
-      { cat: "Backup",           item: "Backup frequency and retention",   priority: "medium" },
-      { cat: "Disaster Recovery",item: "RPO / RTO expectations",          priority: "high"   },
-      { cat: "Disaster Recovery",item: "DR site availability",             priority: "high"   },
-      { cat: "Disaster Recovery",item: "DR testing frequency",             priority: "medium" },
-      { cat: "Monitoring",       item: "NMS / SIEM tools in use",          noPriority: true   },
-      { cat: "Monitoring",       item: "AIOps / observability usage",      priority: "low"    },
-      { cat: "Automation",       item: "Ansible / Terraform / automation tools", noPriority: true },
-      { cat: "Automation",       item: "Provisioning automation maturity", priority: "medium" },
+      { cat: "Backup",            item: "Backup vendors / tools in use",            noPriority: true   },
+      { cat: "Backup",            item: "Immutable / offsite backups",              priority: "high"   },
+      { cat: "Backup",            item: "Backup frequency and retention policy",    priority: "medium" },
+      { cat: "Disaster Recovery", item: "RPO / RTO expectations",                   priority: "high"   },
+      { cat: "Disaster Recovery", item: "DR site topology / architecture",          priority: "high",   upload: true },
+      { cat: "Disaster Recovery", item: "DR testing frequency",                     priority: "medium" },
+      { cat: "Monitoring",        item: "NMS / SIEM tools in use",                  noPriority: true   },
+      { cat: "Monitoring",        item: "AIOps / observability usage",              priority: "low"    },
+      { cat: "Automation",        item: "Automation tools (Ansible / Terraform)",   noPriority: true   },
+      { cat: "Automation",        item: "Provisioning automation maturity",         priority: "medium" },
     ]
   },
   {
     id: "commercial", icon: "📊", title: "Commercial & Roadmap",
     desc: "Align budget, vendor preferences, and deliverable expectations.",
     rows: [
-      { cat: "Financial",        item: "Annual IT budget (approx)",           noPriority: true   },
-      { cat: "Financial",        item: "CapEx vs OpEx preference",            noPriority: true   },
-      { cat: "Financial",        item: "Budget approval cycle / timeline",    noPriority: true   },
-      { cat: "Vendor Landscape", item: "Preferred OEM vendors",               noPriority: true   },
-      { cat: "Vendor Landscape", item: "Existing maintenance contracts",      noPriority: true   },
-      { cat: "Future State",     item: "SASE / Zero Trust adoption plans",    priority: "medium" },
-      { cat: "Future State",     item: "AI / ML enablement goals",            priority: "low"    },
-      { cat: "Future State",     item: "3-year IT transformation vision",     priority: "medium" },
-      { cat: "Deliverables",     item: "HLD / LLD / BOM requirements",        priority: "high"   },
-      { cat: "Deliverables",     item: "Migration roadmap needed",            priority: "high"   },
+      { cat: "Financial",        item: "Annual IT budget (approx)",            noPriority: true   },
+      { cat: "Financial",        item: "CapEx vs OpEx preference",             noPriority: true   },
+      { cat: "Financial",        item: "Budget approval cycle / timeline",     noPriority: true   },
+      { cat: "Vendor Landscape", item: "Preferred OEM vendors",                noPriority: true   },
+      { cat: "Vendor Landscape", item: "Existing maintenance contracts",       noPriority: true,  upload: true },
+      { cat: "Future State",     item: "SASE / Zero Trust adoption plans",     priority: "medium" },
+      { cat: "Future State",     item: "AI / ML enablement goals",             priority: "low"    },
+      { cat: "Future State",     item: "3-year IT transformation vision",      priority: "medium" },
+      { cat: "Deliverables",     item: "HLD / LLD / BOM requirements",         priority: "high"   },
+      { cat: "Deliverables",     item: "Migration roadmap needed",             priority: "high"   },
     ]
   },
 ];
 
+// Store uploaded files per question key "si-ri"
+const uploadedFiles = {};
+
+function buildUploadZone(si, ri) {
+  const key = `${si}-${ri}`;
+  return `
+    <div class="upload-zone" id="zone-${key}" onclick="document.getElementById('file-${key}').click()">
+      <input type="file" id="file-${key}" multiple accept="${ACCEPTED}"
+        onchange="handleFiles('${key}', this)" onclick="event.stopPropagation()" />
+      <div class="upload-icon">📎</div>
+      <div class="upload-text">
+        <div class="u-title">Attach diagram / document</div>
+        <div class="u-sub">PDF, PNG, JPG, XLSX, DOCX, Visio · Max 10MB each</div>
+      </div>
+      <div class="upload-badge" id="badge-${key}">Upload</div>
+    </div>
+    <div class="file-list" id="files-${key}"></div>`;
+}
+
+function handleFiles(key, input) {
+  if (!uploadedFiles[key]) uploadedFiles[key] = [];
+  Array.from(input.files).forEach(file => {
+    if (file.size > MAX_MB * 1024 * 1024) { alert(`"${file.name}" exceeds ${MAX_MB}MB limit.`); return; }
+    uploadedFiles[key].push(file);
+  });
+  input.value = '';
+  renderFileList(key);
+  updateProgress();
+}
+
+function removeFile(key, idx) {
+  uploadedFiles[key].splice(idx, 1);
+  renderFileList(key);
+  updateProgress();
+}
+
+function renderFileList(key) {
+  const list = document.getElementById(`files-${key}`);
+  const zone = document.getElementById(`zone-${key}`);
+  const badge = document.getElementById(`badge-${key}`);
+  const files = uploadedFiles[key] || [];
+  list.innerHTML = files.map((f, i) =>
+    `<div class="file-chip">📄 ${f.name} <span class="remove" onclick="removeFile('${key}',${i})">✕</span></div>`
+  ).join('');
+  zone.classList.toggle('has-files', files.length > 0);
+  badge.textContent = files.length > 0 ? `${files.length} file${files.length>1?'s':''}` : 'Upload';
+}
+
+// Build UI
 const tabNav = document.getElementById('tabNav');
 const sectionsEl = document.getElementById('sections');
 
@@ -298,7 +402,6 @@ SECTIONS.forEach((sec, si) => {
   const tab = document.createElement('button');
   tab.className = 'tab-btn' + (si === 0 ? ' active' : '');
   tab.textContent = sec.icon + ' ' + sec.title;
-  tab.dataset.idx = si;
   tab.onclick = () => switchTab(si);
   tabNav.appendChild(tab);
 
@@ -307,34 +410,53 @@ SECTIONS.forEach((sec, si) => {
   card.id = 'sec-' + si;
 
   let lastCat = null, qNum = 0, rowsHTML = '';
-
   sec.rows.forEach((row, ri) => {
     qNum++;
     if (row.cat !== lastCat) {
       lastCat = row.cat;
       rowsHTML += `<div class="category-divider"><span>${row.cat}</span></div>`;
     }
-
-    const badgeHTML = row.noPriority ? '' : `<div class="priority-badge ${row.priority}">${row.priority}</div>`;
-    const fieldsClass = row.noPriority ? 'q-fields-full' : 'q-fields-split';
-    const prioritySelect = row.noPriority ? '' : `
+    const badge = row.noPriority ? '' : `<div class="priority-badge ${row.priority}">${row.priority}</div>`;
+    const prioSelect = row.noPriority ? '' : `
       <select id="prio-${si}-${ri}">
         <option value="High"   ${row.priority==='high'  ?'selected':''}>🟢 High</option>
         <option value="Medium" ${row.priority==='medium'?'selected':''}>🟡 Medium</option>
         <option value="Low"    ${row.priority==='low'   ?'selected':''}>🔵 Low</option>
       </select>`;
 
+    let fieldsHTML = '';
+    if (row.upload && !row.noPriority) {
+      fieldsHTML = `<div class="q-fields-split-upload">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <textarea id="resp-${si}-${ri}" placeholder="Enter your response here…" oninput="updateProgress()"></textarea>
+          ${buildUploadZone(si, ri)}
+        </div>
+        ${prioSelect}
+      </div>`;
+    } else if (row.upload && row.noPriority) {
+      fieldsHTML = `<div class="q-fields-upload">
+        <textarea id="resp-${si}-${ri}" placeholder="Enter your response here…" oninput="updateProgress()"></textarea>
+        ${buildUploadZone(si, ri)}
+      </div>`;
+    } else if (!row.noPriority) {
+      fieldsHTML = `<div class="q-fields-split">
+        <textarea id="resp-${si}-${ri}" placeholder="Enter your response here…" oninput="updateProgress()"></textarea>
+        ${prioSelect}
+      </div>`;
+    } else {
+      fieldsHTML = `<div class="q-fields-full">
+        <textarea id="resp-${si}-${ri}" placeholder="Enter your response here…" oninput="updateProgress()"></textarea>
+      </div>`;
+    }
+
     rowsHTML += `
       <div class="question-row">
         <div class="q-top">
           <div class="q-num">${qNum}</div>
           <div class="q-label">${row.item}</div>
-          ${badgeHTML}
+          ${badge}
         </div>
-        <div class="${fieldsClass}">
-          <textarea id="resp-${si}-${ri}" placeholder="Enter your response here…" oninput="updateProgress()"></textarea>
-          ${prioritySelect}
-        </div>
+        ${fieldsHTML}
       </div>`;
   });
 
@@ -372,9 +494,10 @@ function switchTab(idx) {
 }
 
 function isSectionFilled(si) {
-  return SECTIONS[si].rows.some((_, ri) => {
-    const el = document.getElementById(`resp-${si}-${ri}`);
-    return el && el.value.trim().length > 0;
+  return SECTIONS[si].rows.some((row, ri) => {
+    const hasText = document.getElementById(`resp-${si}-${ri}`)?.value.trim();
+    const hasFiles = (uploadedFiles[`${si}-${ri}`] || []).length > 0;
+    return hasText || hasFiles;
   });
 }
 
@@ -384,18 +507,22 @@ function goToSubmit() {
   document.getElementById('submitCard').classList.add('active');
   const tabs = document.querySelectorAll('.tab-btn');
   tabs[tabs.length - 1].classList.add('active');
-  let totalFilled = 0, totalQ = 0;
-  SECTIONS.forEach((sec, si) => {
-    sec.rows.forEach((_, ri) => {
-      totalQ++;
-      if (document.getElementById(`resp-${si}-${ri}`)?.value.trim()) totalFilled++;
-    });
-  });
+
+  let totalFilled = 0, totalQ = 0, totalFiles = 0;
+  SECTIONS.forEach((sec, si) => sec.rows.forEach((_, ri) => {
+    totalQ++;
+    const hasText = document.getElementById(`resp-${si}-${ri}`)?.value.trim();
+    const files = uploadedFiles[`${si}-${ri}`] || [];
+    if (hasText || files.length > 0) totalFilled++;
+    totalFiles += files.length;
+  }));
+
   const clientName = document.getElementById('clientName').value || '—';
   document.getElementById('summaryGrid').innerHTML = `
     <div class="summary-item"><div class="s-val">${clientName.split(' ')[0]}</div><div class="s-lbl">Client</div></div>
     <div class="summary-item"><div class="s-val">${SECTIONS.length}</div><div class="s-lbl">Sections</div></div>
     <div class="summary-item"><div class="s-val">${totalFilled}</div><div class="s-lbl">Answered</div></div>
+    <div class="summary-item"><div class="s-val">${totalFiles}</div><div class="s-lbl">Files</div></div>
     <div class="summary-item"><div class="s-val">${totalQ - totalFilled}</div><div class="s-lbl">Skipped</div></div>`;
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -403,32 +530,58 @@ function goToSubmit() {
 
 function updateProgress() {
   let filled = 0, total = 0;
-  SECTIONS.forEach((sec, si) => {
-    sec.rows.forEach((_, ri) => {
-      total++;
-      if (document.getElementById(`resp-${si}-${ri}`)?.value.trim()) filled++;
-    });
-  });
+  SECTIONS.forEach((sec, si) => sec.rows.forEach((_, ri) => {
+    total++;
+    const hasText = document.getElementById(`resp-${si}-${ri}`)?.value.trim();
+    const hasFiles = (uploadedFiles[`${si}-${ri}`] || []).length > 0;
+    if (hasText || hasFiles) filled++;
+  }));
   const pct = Math.round((filled / total) * 100);
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('progress-pct').textContent = pct + '%';
 }
 
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 async function submitForm() {
   const clientName = document.getElementById('clientName').value.trim() || 'Unknown';
   const responses = [];
-  SECTIONS.forEach(sec => {
-    sec.rows.forEach((row, ri) => {
-      const si = SECTIONS.indexOf(sec);
+
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('loader').classList.add('show');
+  document.getElementById('loaderMsg').textContent = 'Preparing files for upload…';
+
+  for (let si = 0; si < SECTIONS.length; si++) {
+    const sec = SECTIONS[si];
+    for (let ri = 0; ri < sec.rows.length; ri++) {
+      const row = sec.rows[ri];
+      const key = `${si}-${ri}`;
+      const files = uploadedFiles[key] || [];
+      const fileData = [];
+
+      for (const file of files) {
+        document.getElementById('loaderMsg').textContent = `Encoding "${file.name}"…`;
+        const b64 = await fileToBase64(file);
+        fileData.push({ name: file.name, type: file.type, data: b64 });
+      }
+
       responses.push({
-        section:  sec.title,
-        category: row.cat,
-        item:     row.item,
+        section:  sec.title, category: row.cat, item: row.item,
         response: document.getElementById(`resp-${si}-${ri}`)?.value.trim() || '',
         priority: row.noPriority ? 'N/A' : (document.getElementById(`prio-${si}-${ri}`)?.value || ''),
+        files: fileData
       });
-    });
-  });
+    }
+  }
+
+  document.getElementById('loaderMsg').textContent = 'Submitting to Google Drive…';
 
   const payload = {
     clientName,
@@ -437,9 +590,6 @@ async function submitForm() {
     fillDate:     document.getElementById('fillDate').value,
     responses
   };
-
-  document.getElementById('submitBtn').style.display = 'none';
-  document.getElementById('loader').classList.add('show');
 
   try {
     await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
