@@ -7,576 +7,104 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --navy: #0D1B2A;
-    --navy2: #1A3A5C;
-    --gold: #C9A84C;
-    --gold-light: #F5E6C0;
-    --gold-pale: #fdf8ee;
-    --ice: #EAF1FB;
-    --white: #ffffff;
-    --text: #1a1a2e;
-    --muted: #6b7280;
-    --border: #dde4ef;
-    --green: #2E7D32;
-    --amber: #F57F17;
-    --blue: #1565C0;
-    --red: #c0392b;
-    --success-bg: #f0fdf4;
+    --navy: #0D1B2A; --navy2: #1A3A5C; --gold: #C9A84C; --gold-light: #F5E6C0;
+    --ice: #EAF1FB; --white: #ffffff; --text: #1a1a2e; --muted: #6b7280;
+    --border: #dde4ef; --green: #2E7D32; --amber: #F57F17; --blue: #1565C0;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--navy);
-    color: var(--text);
-    min-height: 100vh;
-  }
-
-  /* ── Animated background ── */
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--text); min-height: 100vh; }
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 80%, rgba(26,58,92,0.4) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
+    content: ''; position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(26,58,92,0.4) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
   }
-
-  /* ── Header ── */
-  .header {
-    position: relative;
-    z-index: 10;
-    background: linear-gradient(135deg, var(--navy) 0%, #0f2744 100%);
-    border-bottom: 2px solid var(--gold);
-    padding: 0;
-  }
-
-  .header-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 36px 40px 28px;
-  }
-
-  .header-badge {
-    display: inline-block;
-    background: rgba(201,168,76,0.15);
-    border: 1px solid rgba(201,168,76,0.4);
-    color: var(--gold);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 5px 14px;
-    border-radius: 20px;
-    margin-bottom: 16px;
-  }
-
-  .header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(26px, 4vw, 40px);
-    color: var(--white);
-    line-height: 1.2;
-    margin-bottom: 10px;
-  }
-
+  .header { position: relative; z-index: 10; background: linear-gradient(135deg, var(--navy) 0%, #0f2744 100%); border-bottom: 2px solid var(--gold); }
+  .header-inner { max-width: 1000px; margin: 0 auto; padding: 36px 40px 28px; }
+  .header-badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 16px; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 4vw, 40px); color: var(--white); line-height: 1.2; margin-bottom: 10px; }
   .header h1 span { color: var(--gold); }
-
-  .header-sub {
-    color: rgba(255,255,255,0.6);
-    font-size: 14px;
-    font-weight: 300;
-    max-width: 600px;
-    line-height: 1.6;
-  }
-
-  .header-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 24px;
-    flex-wrap: wrap;
-  }
-
-  .meta-chip {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    color: rgba(255,255,255,0.7);
-    font-size: 12px;
-  }
-
-  .meta-chip .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--gold);
-  }
-
-  /* ── Progress bar ── */
-  .progress-wrap {
-    background: rgba(255,255,255,0.06);
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding: 14px 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    color: rgba(255,255,255,0.5);
-    font-size: 11px;
-    margin-bottom: 7px;
-  }
-
-  .progress-bar {
-    height: 4px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold), #e8c56a);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-
-  /* ── Main layout ── */
-  .main {
-    position: relative;
-    z-index: 1;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 32px 40px 80px;
-  }
-
-  /* ── Client info card ── */
-  .client-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 28px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-    border-top: 4px solid var(--gold);
-    animation: slideUp 0.5s ease both;
-  }
-
-  .client-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--navy);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .client-card h2::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
+  .header-sub { color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 300; max-width: 600px; line-height: 1.6; }
+  .header-meta { display: flex; gap: 24px; margin-top: 24px; flex-wrap: wrap; }
+  .meta-chip { display: flex; align-items: center; gap: 7px; color: rgba(255,255,255,0.7); font-size: 12px; }
+  .meta-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+  .progress-wrap { background: rgba(255,255,255,0.06); border-top: 1px solid rgba(255,255,255,0.08); padding: 14px 40px; max-width: 1000px; margin: 0 auto; }
+  .progress-label { display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); font-size: 11px; margin-bottom: 7px; }
+  .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), #e8c56a); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+  .main { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; padding: 32px 40px 80px; }
+  .client-card { background: var(--white); border-radius: 16px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 8px 40px rgba(0,0,0,0.25); border-top: 4px solid var(--gold); animation: slideUp 0.5s ease both; }
+  .client-card h2 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .client-card h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
   .field-group { display: flex; flex-direction: column; gap: 6px; }
-  .field-group.full { grid-column: 1 / -1; }
-
-  label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--navy2);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-
-  input[type="text"], input[type="email"], select, textarea {
-    padding: 11px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    background: #fafbfe;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
-    background: var(--white);
-  }
-
-  /* ── Tab nav ── */
-  .tab-nav {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-
-  .tab-btn {
-    padding: 9px 16px;
-    border-radius: 8px;
-    border: 1.5px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.6);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .tab-btn:hover {
-    background: rgba(201,168,76,0.1);
-    border-color: rgba(201,168,76,0.3);
-    color: var(--gold);
-  }
-
-  .tab-btn.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--navy);
-    font-weight: 600;
-  }
-
-  .tab-btn.done {
-    background: rgba(46,125,50,0.15);
-    border-color: rgba(46,125,50,0.4);
-    color: #4caf50;
-  }
-
-  /* ── Section card ── */
-  .section-card {
-    background: var(--white);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-    display: none;
-    animation: slideUp 0.35s ease both;
-  }
-
+  label { font-size: 12px; font-weight: 600; color: var(--navy2); text-transform: uppercase; letter-spacing: 0.8px; }
+  input[type="text"], input[type="email"], select, textarea { padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: #fafbfe; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); background: var(--white); }
+  .tab-nav { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+  .tab-btn { padding: 9px 16px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .tab-btn:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); color: var(--gold); }
+  .tab-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 600; }
+  .tab-btn.done { background: rgba(46,125,50,0.15); border-color: rgba(46,125,50,0.4); color: #4caf50; }
+  .section-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.25); display: none; animation: slideUp 0.35s ease both; }
   .section-card.active { display: block; }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .section-header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
-    padding: 24px 32px;
-    border-bottom: 3px solid var(--gold);
-  }
-
-  .section-header h3 {
-    font-family: 'Playfair Display', serif;
-    color: var(--white);
-    font-size: 22px;
-    margin-bottom: 4px;
-  }
-
-  .section-header p {
-    color: rgba(255,255,255,0.55);
-    font-size: 13px;
-  }
-
-  /* ── Category divider ── */
-  .category-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 32px;
-    background: var(--ice);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .category-divider span {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--navy2);
-  }
-
-  .category-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  /* ── Question row ── */
-  .question-row {
-    padding: 20px 32px;
-    border-bottom: 1px solid #f0f3f8;
-    transition: background 0.15s;
-  }
-
+  @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  .section-header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%); padding: 24px 32px; border-bottom: 3px solid var(--gold); }
+  .section-header h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 22px; margin-bottom: 4px; }
+  .section-header p { color: rgba(255,255,255,0.55); font-size: 13px; }
+  .category-divider { display: flex; align-items: center; gap: 12px; padding: 10px 32px; background: var(--ice); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .category-divider span { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--navy2); }
+  .category-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .question-row { padding: 20px 32px; border-bottom: 1px solid #f0f3f8; transition: background 0.15s; }
   .question-row:hover { background: #fafbfe; }
-
   .question-row:last-child { border-bottom: none; }
-
-  .q-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-
-  .q-label {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.5;
-    flex: 1;
-  }
-
-  .q-num {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: var(--white);
-    font-size: 10px;
-    font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .priority-badge {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 12px;
-    flex-shrink: 0;
-  }
-
+  .q-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+  .q-label { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.5; flex: 1; }
+  .q-num { width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: var(--white); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .priority-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 10px; border-radius: 12px; flex-shrink: 0; }
   .priority-badge.high   { background: rgba(46,125,50,0.12);  color: var(--green); }
   .priority-badge.medium { background: rgba(245,127,23,0.12); color: var(--amber); }
   .priority-badge.low    { background: rgba(21,101,192,0.12); color: var(--blue);  }
-
-  .q-fields {
-    display: grid;
-    grid-template-columns: 1fr 160px;
-    gap: 10px;
-  }
-
-  .q-fields textarea {
-    resize: vertical;
-    min-height: 60px;
-    font-size: 13px;
-  }
-
-  .q-fields select { font-size: 13px; }
-
-  /* ── Section nav ── */
-  .section-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 32px;
-    background: #f8fafc;
-    border-top: 1px solid var(--border);
-  }
-
-  .btn {
-    padding: 11px 24px;
-    border-radius: 8px;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .btn-outline {
-    background: transparent;
-    border: 1.5px solid var(--border);
-    color: var(--muted);
-  }
-
-  .btn-outline:hover {
-    border-color: var(--navy2);
-    color: var(--navy);
-  }
-
-  .btn-primary {
-    background: var(--navy);
-    color: var(--white);
-  }
-
-  .btn-primary:hover {
-    background: var(--navy2);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(13,27,42,0.3);
-  }
-
-  .btn-gold {
-    background: var(--gold);
-    color: var(--navy);
-  }
-
-  .btn-gold:hover {
-    background: #b8943e;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(201,168,76,0.4);
-  }
-
-  /* ── Submit section ── */
-  .submit-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-    display: none;
-    animation: slideUp 0.4s ease both;
-  }
-
+  /* Response only = full width; with priority = grid */
+  .q-fields-full { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .q-fields-split { display: grid; grid-template-columns: 1fr 160px; gap: 10px; }
+  .q-fields-full textarea, .q-fields-split textarea { resize: vertical; min-height: 60px; font-size: 13px; }
+  .q-fields-split select { font-size: 13px; }
+  .section-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 32px; background: #f8fafc; border-top: 1px solid var(--border); }
+  .btn { padding: 11px 24px; border-radius: 8px; border: none; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--muted); }
+  .btn-outline:hover { border-color: var(--navy2); color: var(--navy); }
+  .btn-primary { background: var(--navy); color: var(--white); }
+  .btn-primary:hover { background: var(--navy2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(13,27,42,0.3); }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: #b8943e; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.4); }
+  .submit-card { background: var(--white); border-radius: 16px; padding: 40px; text-align: center; box-shadow: 0 8px 40px rgba(0,0,0,0.25); display: none; animation: slideUp 0.4s ease both; }
   .submit-card.active { display: block; }
-
-  .submit-icon {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--navy), var(--navy2));
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 28px;
-  }
-
-  .submit-card h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    color: var(--navy);
-    margin-bottom: 10px;
-  }
-
-  .submit-card p {
-    color: var(--muted);
-    font-size: 14px;
-    max-width: 500px;
-    margin: 0 auto 28px;
-    line-height: 1.7;
-  }
-
-  .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-bottom: 28px;
-    text-align: left;
-  }
-
-  .summary-item {
-    background: var(--ice);
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-
-  .summary-item .s-val {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--navy);
-    font-family: 'Playfair Display', serif;
-  }
-
-  .summary-item .s-lbl {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-top: 2px;
-  }
-
-  /* ── Success state ── */
-  .success-state {
-    display: none;
-    text-align: center;
-    padding: 20px;
-  }
-
+  .submit-icon { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--navy2)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
+  .submit-card h2 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--navy); margin-bottom: 10px; }
+  .submit-card p { color: var(--muted); font-size: 14px; max-width: 500px; margin: 0 auto 28px; line-height: 1.7; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; text-align: left; }
+  .summary-item { background: var(--ice); border-radius: 10px; padding: 14px 16px; }
+  .summary-item .s-val { font-size: 22px; font-weight: 700; color: var(--navy); font-family: 'Playfair Display', serif; }
+  .summary-item .s-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-top: 2px; }
+  .success-state { display: none; text-align: center; padding: 20px; }
   .success-state.show { display: block; }
-
-  .success-circle {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2E7D32, #4caf50);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 36px;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-  }
-
-  @keyframes popIn {
-    from { transform: scale(0); opacity: 0; }
-    to   { transform: scale(1); opacity: 1; }
-  }
-
-  /* ── Loader ── */
-  .loader {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: var(--muted);
-    font-size: 14px;
-  }
-
+  .success-circle { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #2E7D32, #4caf50); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 36px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+  @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .loader { display: none; align-items: center; justify-content: center; gap: 10px; color: var(--muted); font-size: 14px; }
   .loader.show { display: flex; }
-
-  .spinner {
-    width: 20px; height: 20px;
-    border: 2px solid var(--border);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-  }
-
+  .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ── Confidential footer ── */
-  .footer {
-    text-align: center;
-    color: rgba(255,255,255,0.25);
-    font-size: 11px;
-    padding: 24px 40px;
-    letter-spacing: 0.5px;
-  }
-
+  .footer { text-align: center; color: rgba(255,255,255,0.25); font-size: 11px; padding: 24px 40px; letter-spacing: 0.5px; }
   @media (max-width: 640px) {
-    .main { padding: 20px 16px 60px; }
-    .header-inner { padding: 24px 20px 20px; }
-    .progress-wrap { padding: 12px 20px; }
-    .q-fields { grid-template-columns: 1fr; }
-    .field-row { grid-template-columns: 1fr; }
-    .question-row, .section-nav { padding: 16px 20px; }
-    .section-header { padding: 20px; }
-    .client-card { padding: 20px; }
+    .main { padding: 20px 16px 60px; } .header-inner { padding: 24px 20px 20px; }
+    .q-fields-split { grid-template-columns: 1fr; } .field-row { grid-template-columns: 1fr; }
+    .question-row, .section-nav { padding: 16px 20px; } .section-header { padding: 20px; } .client-card { padding: 20px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ── Header ── -->
 <div class="header">
   <div class="header-inner">
     <div class="header-badge">Confidential Discovery Document</div>
@@ -590,64 +118,37 @@
     </div>
   </div>
   <div class="progress-wrap">
-    <div class="progress-label">
-      <span>Completion Progress</span>
-      <span id="progress-pct">0%</span>
-    </div>
+    <div class="progress-label"><span>Completion Progress</span><span id="progress-pct">0%</span></div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
 </div>
 
 <div class="main">
-
-  <!-- ── Client Info ── -->
   <div class="client-card">
     <h2>Client Information</h2>
     <div class="field-row">
-      <div class="field-group">
-        <label>Client / Company Name *</label>
-        <input type="text" id="clientName" placeholder="e.g. Acme Corporation" />
-      </div>
-      <div class="field-group">
-        <label>Primary Contact Name</label>
-        <input type="text" id="contactName" placeholder="e.g. Rajesh Kumar" />
-      </div>
+      <div class="field-group"><label>Client / Company Name *</label><input type="text" id="clientName" placeholder="e.g. Acme Corporation" /></div>
+      <div class="field-group"><label>Primary Contact Name</label><input type="text" id="contactName" placeholder="e.g. Rajesh Kumar" /></div>
     </div>
     <div class="field-row">
-      <div class="field-group">
-        <label>Email Address</label>
-        <input type="email" id="contactEmail" placeholder="e.g. rajesh@acme.com" />
-      </div>
-      <div class="field-group">
-        <label>Date</label>
-        <input type="text" id="fillDate" placeholder="e.g. 28 May 2026" />
-      </div>
+      <div class="field-group"><label>Email Address</label><input type="email" id="contactEmail" placeholder="e.g. rajesh@acme.com" /></div>
+      <div class="field-group"><label>Date</label><input type="text" id="fillDate" placeholder="e.g. 28 May 2026" /></div>
     </div>
   </div>
 
-  <!-- ── Tab Nav ── -->
   <div class="tab-nav" id="tabNav"></div>
-
-  <!-- ── Section Cards ── -->
   <div id="sections"></div>
 
-  <!-- ── Submit Card ── -->
   <div class="submit-card" id="submitCard">
     <div id="formState">
       <div class="submit-icon">📋</div>
       <h2>Ready to Submit</h2>
       <p>Thank you for completing the discovery checklist. Your responses will be saved directly to our secure Google Drive and our team will review them promptly.</p>
-
       <div class="summary-grid" id="summaryGrid"></div>
-
       <div class="loader" id="loader"><div class="spinner"></div> Submitting your responses…</div>
-
-      <button class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="font-size:16px; padding:14px 40px;">
-        Submit to DNISPL Team →
-      </button>
+      <button class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="font-size:16px; padding:14px 40px;">Submit to DNISPL Team →</button>
       <p style="margin-top:14px; font-size:12px; color:#aaa;">All data is transmitted securely and treated as strictly confidential.</p>
     </div>
-
     <div class="success-state" id="successState">
       <div class="success-circle">✓</div>
       <h2 style="color:#2E7D32;">Successfully Submitted!</h2>
@@ -655,7 +156,6 @@
       <p style="font-size:13px; color:#aaa; margin-top:8px;">You may now close this window.</p>
     </div>
   </div>
-
 </div>
 
 <div class="footer">© 2025 DNISPL · Confidential & Proprietary · Not for Distribution</div>
@@ -663,146 +163,138 @@
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhcxb1eyMVayb2cjhkRZtmB7IiOwC8woafMYMm7nwvHHS7r2lCuaypNJASo8c-0P50OQ/exec";
 
+// noPriority: true = just a text response, no dropdown (basic info questions)
 const SECTIONS = [
   {
     id: "business", icon: "🏢", title: "Business & Strategy",
     desc: "Understand your business context, goals, and current challenges.",
     rows: [
-      { cat: "Business Overview",  item: "Company name",                  priority: "high"   },
-      { cat: "Business Overview",  item: "Industry vertical",             priority: "high"   },
-      { cat: "Business Overview",  item: "Number of locations / sites",   priority: "medium" },
-      { cat: "Business Overview",  item: "Growth plans (1–5 years)",      priority: "medium" },
+      { cat: "Business Overview",  item: "Company name",                  noPriority: true },
+      { cat: "Business Overview",  item: "Industry vertical",             noPriority: true },
+      { cat: "Business Overview",  item: "Number of locations / sites",   noPriority: true },
+      { cat: "Business Overview",  item: "Growth plans (1–5 years)",      noPriority: true },
       { cat: "Business Drivers",   item: "Digital transformation goals",  priority: "high"   },
       { cat: "Business Drivers",   item: "Cost optimisation initiatives", priority: "medium" },
       { cat: "Business Drivers",   item: "Cloud migration plans",         priority: "medium" },
       { cat: "Current Challenges", item: "Performance issues",            priority: "high"   },
       { cat: "Current Challenges", item: "Security concerns",             priority: "high"   },
       { cat: "Current Challenges", item: "Legacy systems",                priority: "medium" },
-      { cat: "Documentation",      item: "Asset inventory",               priority: "medium" },
-      { cat: "Documentation",      item: "IP schema",                     priority: "high"   },
     ]
   },
   {
     id: "it", icon: "🖥️", title: "IT Landscape",
     desc: "Map the existing IT environment, team structure, and documentation.",
     rows: [
-      { cat: "IT Organisation", item: "Internal IT team structure",   priority: "high"   },
-      { cat: "IT Organisation", item: "Support model",                priority: "medium" },
+      { cat: "IT Organisation", item: "Internal IT team structure",   noPriority: true },
+      { cat: "IT Organisation", item: "Support model",                noPriority: true },
+      { cat: "IT Organisation", item: "Number of IT staff",           noPriority: true },
       { cat: "Documentation",   item: "Network diagrams available",   priority: "medium" },
-      { cat: "Documentation",   item: "IP schema",                    priority: "high"   },
+      { cat: "Documentation",   item: "IP schema / addressing plan",  priority: "high"   },
       { cat: "Documentation",   item: "Asset inventory",              priority: "medium" },
-      { cat: "LAN",             item: "VLAN design",                  priority: "high"   },
-      { cat: "Cloud",           item: "Hybrid connectivity",          priority: "medium" },
-      { cat: "Cloud",           item: "AWS / Azure / GCP usage",      priority: "high"   },
-      { cat: "Backup",          item: "Immutable backups",            priority: "high"   },
+      { cat: "Documentation",   item: "Change management process",    priority: "low"    },
     ]
   },
   {
     id: "network", icon: "🌐", title: "Network & SD-WAN",
     desc: "Assess the network topology, SD-WAN needs, and DR readiness.",
     rows: [
-      { cat: "LAN",             item: "Core / distribution / access topology",       priority: "high"   },
-      { cat: "LAN",             item: "VLAN design",                                 priority: "high"   },
-      { cat: "LAN",             item: "QoS implementation",                          priority: "medium" },
-      { cat: "Wireless",        item: "Wi-Fi coverage issues",                       priority: "medium" },
-      { cat: "Wireless",        item: "Guest Wi-Fi requirements",                    priority: "low"    },
-      { cat: "Routing",         item: "Routing protocols",                           priority: "high"   },
-      { cat: "Routing",         item: "Internet breakout strategy",                  priority: "medium" },
-      { cat: "SD-WAN",          item: "Application-aware routing requirements",      priority: "high"   },
-      { cat: "SD-WAN",          item: "Centralised orchestration",                   priority: "medium" },
-      { cat: "SD-WAN",          item: "SASE integration",                            priority: "medium" },
-      { cat: "Migration",       item: "Application dependencies",                    priority: "high"   },
-      { cat: "Disaster Recovery", item: "DR testing frequency",                      priority: "medium" },
+      { cat: "LAN",             item: "Core / distribution / access topology",     priority: "high"   },
+      { cat: "LAN",             item: "VLAN design",                               priority: "high"   },
+      { cat: "LAN",             item: "QoS implementation",                        priority: "medium" },
+      { cat: "Wireless",        item: "Wi-Fi coverage issues",                     priority: "medium" },
+      { cat: "Wireless",        item: "Guest Wi-Fi requirements",                  priority: "low"    },
+      { cat: "Routing",         item: "Routing protocols in use",                  priority: "high"   },
+      { cat: "Routing",         item: "Internet breakout strategy",                priority: "medium" },
+      { cat: "SD-WAN",          item: "Application-aware routing requirements",    priority: "high"   },
+      { cat: "SD-WAN",          item: "Centralised orchestration needs",           priority: "medium" },
+      { cat: "SD-WAN",          item: "SASE integration plans",                    priority: "medium" },
+      { cat: "WAN",             item: "Number of WAN links / ISPs",                noPriority: true   },
+      { cat: "WAN",             item: "Current bandwidth per site",                noPriority: true   },
     ]
   },
   {
     id: "dc", icon: "☁️", title: "Data Centre & Cloud",
     desc: "Inventory compute, storage, and cloud workloads.",
     rows: [
-      { cat: "Compute",   item: "Physical server inventory",      priority: "high"   },
-      { cat: "Compute",   item: "Hypervisor platform",            priority: "high"   },
-      { cat: "Storage",   item: "SAN / NAS details",              priority: "high"   },
-      { cat: "Storage",   item: "Capacity / utilisation",         priority: "medium" },
-      { cat: "Cloud",     item: "AWS / Azure / GCP usage",        priority: "high"   },
-      { cat: "Cloud",     item: "Hybrid connectivity",            priority: "medium" },
-      { cat: "Migration", item: "Cloud migration readiness",      priority: "high"   },
-      { cat: "Migration", item: "Application dependencies",       priority: "high"   },
-      { cat: "Monitoring",item: "AIOps usage",                    priority: "low"    },
-      { cat: "Security Architecture", item: "IDS / IPS deployment", priority: "medium" },
+      { cat: "Compute",   item: "Physical server inventory",        priority: "high"   },
+      { cat: "Compute",   item: "Hypervisor platform",              priority: "high"   },
+      { cat: "Compute",   item: "Server refresh cycle",             noPriority: true   },
+      { cat: "Storage",   item: "SAN / NAS details",                priority: "high"   },
+      { cat: "Storage",   item: "Capacity / utilisation",           priority: "medium" },
+      { cat: "Cloud",     item: "AWS / Azure / GCP usage",          priority: "high"   },
+      { cat: "Cloud",     item: "Hybrid / multi-cloud connectivity",priority: "medium" },
+      { cat: "Cloud",     item: "Cloud migration readiness",        priority: "high"   },
+      { cat: "Migration", item: "Application dependencies mapping", priority: "high"   },
+      { cat: "Migration", item: "Migration timeline expectations",  priority: "medium" },
     ]
   },
   {
     id: "security", icon: "🔒", title: "Security",
     desc: "Evaluate security posture, identity controls, and compliance.",
     rows: [
-      { cat: "Security Architecture", item: "Firewall vendors / models",      priority: "high"   },
-      { cat: "Security Architecture", item: "IDS / IPS deployment",           priority: "high"   },
-      { cat: "Identity",              item: "MFA adoption",                   priority: "high"   },
-      { cat: "Identity",              item: "SSO implementation",             priority: "high"   },
-      { cat: "Compliance",            item: "ISO / PCI / GDPR requirements",  priority: "high"   },
-      { cat: "Compliance",            item: "CERT-In requirements",           priority: "high"   },
-      { cat: "Current Challenges",    item: "Security concerns",              priority: "high"   },
-      { cat: "Routing",               item: "Internet breakout strategy",     priority: "medium" },
-      { cat: "Automation",            item: "Provisioning automation",        priority: "medium" },
+      { cat: "Security Architecture", item: "Firewall vendors / models",         priority: "high"   },
+      { cat: "Security Architecture", item: "IDS / IPS deployment",              priority: "high"   },
+      { cat: "Security Architecture", item: "SOC / SIEM in place",               priority: "high"   },
+      { cat: "Identity",              item: "MFA adoption",                      priority: "high"   },
+      { cat: "Identity",              item: "SSO / IAM implementation",          priority: "high"   },
+      { cat: "Identity",              item: "Privileged access management",      priority: "medium" },
+      { cat: "Compliance",            item: "ISO / PCI / GDPR requirements",     priority: "high"   },
+      { cat: "Compliance",            item: "CERT-In compliance requirements",   priority: "high"   },
+      { cat: "Compliance",            item: "Last security audit date",          noPriority: true   },
     ]
   },
   {
     id: "enduser", icon: "💼", title: "End User & Apps",
     desc: "Document end-user devices, collaboration tools, and enterprise apps.",
     rows: [
-      { cat: "End User Devices", item: "Laptop / desktop inventory",     priority: "high"   },
-      { cat: "End User Devices", item: "MDM / UEM platform",             priority: "medium" },
-      { cat: "Collaboration",    item: "Teams / Zoom / Webex usage",     priority: "medium" },
-      { cat: "Collaboration",    item: "Voice systems",                  priority: "medium" },
-      { cat: "Applications",     item: "ERP / CRM / HRMS landscape",     priority: "high"   },
-      { cat: "Applications",     item: "Application dependencies",       priority: "high"   },
-      { cat: "Current Challenges", item: "Legacy systems",               priority: "medium" },
-      { cat: "Compliance",       item: "CERT-In requirements",           priority: "high"   },
-      { cat: "Financial",        item: "CapEx vs OpEx preference",       priority: "medium" },
+      { cat: "End User Devices", item: "Laptop / desktop inventory count",   noPriority: true   },
+      { cat: "End User Devices", item: "MDM / UEM platform in use",          priority: "medium" },
+      { cat: "End User Devices", item: "OS standardisation (Win/Mac/Linux)", noPriority: true   },
+      { cat: "Collaboration",    item: "Collaboration platform (Teams / Zoom / Webex)", noPriority: true },
+      { cat: "Collaboration",    item: "Voice / telephony systems",          noPriority: true   },
+      { cat: "Applications",     item: "ERP / CRM / HRMS landscape",         priority: "high"   },
+      { cat: "Applications",     item: "Business-critical applications list",priority: "high"   },
+      { cat: "Applications",     item: "Custom / in-house developed apps",   priority: "medium" },
     ]
   },
   {
     id: "backup", icon: "🛡️", title: "Backup, DR & Ops",
     desc: "Define recovery objectives, monitoring tools, and automation.",
     rows: [
-      { cat: "Backup",           item: "Backup vendors / tools",       priority: "high"   },
-      { cat: "Backup",           item: "Immutable backups",            priority: "high"   },
-      { cat: "Disaster Recovery",item: "RPO / RTO expectations",       priority: "high"   },
-      { cat: "Disaster Recovery",item: "DR testing frequency",         priority: "medium" },
-      { cat: "Monitoring",       item: "NMS / SIEM tools",             priority: "high"   },
-      { cat: "Monitoring",       item: "AIOps usage",                  priority: "low"    },
-      { cat: "Automation",       item: "Ansible / Terraform usage",    priority: "medium" },
-      { cat: "Automation",       item: "Provisioning automation",      priority: "medium" },
-      { cat: "IT Organisation",  item: "Support model",                priority: "medium" },
-      { cat: "SD-WAN",           item: "SASE integration",             priority: "medium" },
-      { cat: "End User Devices", item: "MDM / UEM platform",           priority: "medium" },
-      { cat: "Future State",     item: "AI / ML enablement",           priority: "low"    },
+      { cat: "Backup",           item: "Backup vendors / tools in use",   noPriority: true   },
+      { cat: "Backup",           item: "Immutable / offsite backups",      priority: "high"   },
+      { cat: "Backup",           item: "Backup frequency and retention",   priority: "medium" },
+      { cat: "Disaster Recovery",item: "RPO / RTO expectations",          priority: "high"   },
+      { cat: "Disaster Recovery",item: "DR site availability",             priority: "high"   },
+      { cat: "Disaster Recovery",item: "DR testing frequency",             priority: "medium" },
+      { cat: "Monitoring",       item: "NMS / SIEM tools in use",          noPriority: true   },
+      { cat: "Monitoring",       item: "AIOps / observability usage",      priority: "low"    },
+      { cat: "Automation",       item: "Ansible / Terraform / automation tools", noPriority: true },
+      { cat: "Automation",       item: "Provisioning automation maturity", priority: "medium" },
     ]
   },
   {
     id: "commercial", icon: "📊", title: "Commercial & Roadmap",
     desc: "Align budget, vendor preferences, and deliverable expectations.",
     rows: [
-      { cat: "Financial",        item: "Annual IT budget",                priority: "high"   },
-      { cat: "Financial",        item: "CapEx vs OpEx preference",        priority: "high"   },
-      { cat: "Vendor Landscape", item: "Preferred OEMs",                  priority: "high"   },
-      { cat: "Future State",     item: "SASE / Zero Trust plans",         priority: "medium" },
-      { cat: "Future State",     item: "AI / ML enablement",              priority: "low"    },
-      { cat: "Deliverables",     item: "HLD / LLD / BOM requirements",    priority: "high"   },
-      { cat: "Deliverables",     item: "Migration roadmap",               priority: "high"   },
-      { cat: "Documentation",    item: "Asset inventory",                 priority: "medium" },
-      { cat: "Compute",          item: "Hypervisor platform",             priority: "medium" },
-      { cat: "Collaboration",    item: "Voice systems",                   priority: "low"    },
+      { cat: "Financial",        item: "Annual IT budget (approx)",           noPriority: true   },
+      { cat: "Financial",        item: "CapEx vs OpEx preference",            noPriority: true   },
+      { cat: "Financial",        item: "Budget approval cycle / timeline",    noPriority: true   },
+      { cat: "Vendor Landscape", item: "Preferred OEM vendors",               noPriority: true   },
+      { cat: "Vendor Landscape", item: "Existing maintenance contracts",      noPriority: true   },
+      { cat: "Future State",     item: "SASE / Zero Trust adoption plans",    priority: "medium" },
+      { cat: "Future State",     item: "AI / ML enablement goals",            priority: "low"    },
+      { cat: "Future State",     item: "3-year IT transformation vision",     priority: "medium" },
+      { cat: "Deliverables",     item: "HLD / LLD / BOM requirements",        priority: "high"   },
+      { cat: "Deliverables",     item: "Migration roadmap needed",            priority: "high"   },
     ]
   },
 ];
 
-// Build UI
 const tabNav = document.getElementById('tabNav');
 const sectionsEl = document.getElementById('sections');
 
 SECTIONS.forEach((sec, si) => {
-  // Tab
   const tab = document.createElement('button');
   tab.className = 'tab-btn' + (si === 0 ? ' active' : '');
   tab.textContent = sec.icon + ' ' + sec.title;
@@ -810,14 +302,11 @@ SECTIONS.forEach((sec, si) => {
   tab.onclick = () => switchTab(si);
   tabNav.appendChild(tab);
 
-  // Card
   const card = document.createElement('div');
   card.className = 'section-card' + (si === 0 ? ' active' : '');
   card.id = 'sec-' + si;
 
-  let lastCat = null;
-  let qNum = 0;
-  let rowsHTML = '';
+  let lastCat = null, qNum = 0, rowsHTML = '';
 
   sec.rows.forEach((row, ri) => {
     qNum++;
@@ -825,63 +314,57 @@ SECTIONS.forEach((sec, si) => {
       lastCat = row.cat;
       rowsHTML += `<div class="category-divider"><span>${row.cat}</span></div>`;
     }
+
+    const badgeHTML = row.noPriority ? '' : `<div class="priority-badge ${row.priority}">${row.priority}</div>`;
+    const fieldsClass = row.noPriority ? 'q-fields-full' : 'q-fields-split';
+    const prioritySelect = row.noPriority ? '' : `
+      <select id="prio-${si}-${ri}">
+        <option value="High"   ${row.priority==='high'  ?'selected':''}>🟢 High</option>
+        <option value="Medium" ${row.priority==='medium'?'selected':''}>🟡 Medium</option>
+        <option value="Low"    ${row.priority==='low'   ?'selected':''}>🔵 Low</option>
+      </select>`;
+
     rowsHTML += `
       <div class="question-row">
         <div class="q-top">
           <div class="q-num">${qNum}</div>
           <div class="q-label">${row.item}</div>
-          <div class="priority-badge ${row.priority}">${row.priority}</div>
+          ${badgeHTML}
         </div>
-        <div class="q-fields">
+        <div class="${fieldsClass}">
           <textarea id="resp-${si}-${ri}" placeholder="Enter your response here…" oninput="updateProgress()"></textarea>
-          <select id="prio-${si}-${ri}">
-            <option value="High" ${row.priority==='high'?'selected':''}>🟢 High</option>
-            <option value="Medium" ${row.priority==='medium'?'selected':''}>🟡 Medium</option>
-            <option value="Low" ${row.priority==='low'?'selected':''}>🔵 Low</option>
-          </select>
+          ${prioritySelect}
         </div>
       </div>`;
   });
 
   const isLast = si === SECTIONS.length - 1;
   card.innerHTML = `
-    <div class="section-header">
-      <h3>${sec.icon} ${sec.title}</h3>
-      <p>${sec.desc}</p>
-    </div>
+    <div class="section-header"><h3>${sec.icon} ${sec.title}</h3><p>${sec.desc}</p></div>
     ${rowsHTML}
     <div class="section-nav">
       ${si > 0 ? `<button class="btn btn-outline" onclick="switchTab(${si-1})">← Previous</button>` : '<span></span>'}
       ${!isLast
         ? `<button class="btn btn-primary" onclick="switchTab(${si+1})">Next Section →</button>`
-        : `<button class="btn btn-gold" onclick="goToSubmit()">Review & Submit →</button>`
-      }
+        : `<button class="btn btn-gold" onclick="goToSubmit()">Review & Submit →</button>`}
     </div>`;
   sectionsEl.appendChild(card);
 });
 
-// Submit card tab button
 const submitTab = document.createElement('button');
 submitTab.className = 'tab-btn';
 submitTab.textContent = '✅ Submit';
-submitTab.dataset.idx = SECTIONS.length;
 submitTab.onclick = () => goToSubmit();
 tabNav.appendChild(submitTab);
 
 function switchTab(idx) {
   document.querySelectorAll('.tab-btn').forEach((t, i) => {
     t.classList.remove('active');
-    if (i < SECTIONS.length) {
-      const filled = isSectionFilled(i);
-      t.classList.toggle('done', filled && i !== idx);
-    }
+    if (i < SECTIONS.length) t.classList.toggle('done', isSectionFilled(i) && i !== idx);
   });
   document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
   document.getElementById('submitCard').classList.remove('active');
-
-  const tabs = document.querySelectorAll('.tab-btn');
-  tabs[idx].classList.add('active');
-
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
   const card = document.getElementById('sec-' + idx);
   if (card) card.classList.add('active');
   updateProgress();
@@ -901,14 +384,11 @@ function goToSubmit() {
   document.getElementById('submitCard').classList.add('active');
   const tabs = document.querySelectorAll('.tab-btn');
   tabs[tabs.length - 1].classList.add('active');
-
-  // Build summary
   let totalFilled = 0, totalQ = 0;
   SECTIONS.forEach((sec, si) => {
     sec.rows.forEach((_, ri) => {
       totalQ++;
-      const v = document.getElementById(`resp-${si}-${ri}`)?.value.trim();
-      if (v) totalFilled++;
+      if (document.getElementById(`resp-${si}-${ri}`)?.value.trim()) totalFilled++;
     });
   });
   const clientName = document.getElementById('clientName').value || '—';
@@ -916,8 +396,7 @@ function goToSubmit() {
     <div class="summary-item"><div class="s-val">${clientName.split(' ')[0]}</div><div class="s-lbl">Client</div></div>
     <div class="summary-item"><div class="s-val">${SECTIONS.length}</div><div class="s-lbl">Sections</div></div>
     <div class="summary-item"><div class="s-val">${totalFilled}</div><div class="s-lbl">Answered</div></div>
-    <div class="summary-item"><div class="s-val">${totalQ - totalFilled}</div><div class="s-lbl">Skipped</div></div>
-  `;
+    <div class="summary-item"><div class="s-val">${totalQ - totalFilled}</div><div class="s-lbl">Skipped</div></div>`;
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -927,8 +406,7 @@ function updateProgress() {
   SECTIONS.forEach((sec, si) => {
     sec.rows.forEach((_, ri) => {
       total++;
-      const v = document.getElementById(`resp-${si}-${ri}`)?.value.trim();
-      if (v) filled++;
+      if (document.getElementById(`resp-${si}-${ri}`)?.value.trim()) filled++;
     });
   });
   const pct = Math.round((filled / total) * 100);
@@ -939,17 +417,15 @@ function updateProgress() {
 async function submitForm() {
   const clientName = document.getElementById('clientName').value.trim() || 'Unknown';
   const responses = [];
-
   SECTIONS.forEach(sec => {
     sec.rows.forEach((row, ri) => {
       const si = SECTIONS.indexOf(sec);
       responses.push({
-        section:   sec.title,
-        category:  row.cat,
-        item:      row.item,
-        response:  document.getElementById(`resp-${si}-${ri}`)?.value.trim() || '',
-        priority:  document.getElementById(`prio-${si}-${ri}`)?.value || row.priority,
-        remarks:   ''
+        section:  sec.title,
+        category: row.cat,
+        item:     row.item,
+        response: document.getElementById(`resp-${si}-${ri}`)?.value.trim() || '',
+        priority: row.noPriority ? 'N/A' : (document.getElementById(`prio-${si}-${ri}`)?.value || ''),
       });
     });
   });
@@ -966,12 +442,7 @@ async function submitForm() {
   document.getElementById('loader').classList.add('show');
 
   try {
-    await fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     document.getElementById('loader').classList.remove('show');
     document.getElementById('formState').style.display = 'none';
     document.getElementById('successState').classList.add('show');
@@ -982,7 +453,6 @@ async function submitForm() {
   }
 }
 
-// Set today's date
 document.getElementById('fillDate').value = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
 updateProgress();
 </script>
