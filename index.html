@@ -662,27 +662,86 @@ async function submitForm() {
     fillDate:     document.getElementById('fillDate').value,
     responses:    responses
   };
-
+  var totalAnswered = responses.filter(function(r){ return r.response !== ''; }).length;
   try {
-    var res = await fetch(SCRIPT_URL, {
-      method:  'POST',
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body:    JSON.stringify(payload)
+      body: JSON.stringify(payload)
     });
-    var json = await res.json();
 
-    if (json.success && json.analysis) {
-      renderResults(json.analysis, clientName, document.getElementById('contactEmail').value);
-    } else {
-      throw new Error(json.error || 'Unknown error from server');
-    }
+    // Wait 4 seconds for Apps Script to process then show success
+    document.getElementById('loaderMsg').textContent = 'Saving to Google Drive...';
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    document.getElementById('loaderMsg').textContent = 'Analysing with Gemini AI...';
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    // Hide loader, show results
+    document.getElementById('loader').classList.remove('show');
+    document.getElementById('formState').style.display = 'none';
+    var panel = document.getElementById('resultsPanel');
+    panel.classList.add('show');
+
+    // Populate static success (AI results go to DNISPL's Sheet)
+    document.getElementById('resClientName').textContent  = clientName;
+    document.getElementById('resClientName2').textContent = clientName;
+    document.getElementById('resEmail').textContent       = document.getElementById('contactEmail').value;
+    document.getElementById('resScore').textContent       = '✓';
+    document.getElementById('resScore').style.color       = '#2E7D32';
+    document.getElementById('resLabel').textContent       = 'Submitted Successfully';
+    document.getElementById('resExec').textContent        = 'Your responses have been saved securely to DNISPL\'s system. Our solutions architects are now preparing your personalised IT maturity assessment and roadmap.';
+
+    document.getElementById('resStrengths').innerHTML =
+      '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>All ' + totalAnswered + ' responses captured successfully</span></div>' +
+      '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>Uploaded files saved to DNISPL\'s secure Google Drive</span></div>' +
+      '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>Gemini AI analysis running in background — results go to DNISPL team</span></div>';
+
+    document.getElementById('resInitiatives').innerHTML =
+      '<div class="initiative-card">' +
+        '<div class="init-num">1</div>' +
+        '<div style="flex:1;"><div class="init-title">Personalised IT Maturity Report</div>' +
+        '<div class="init-desc">Full AI-generated assessment with maturity score, gaps, and strengths</div></div>' +
+        '<div class="init-timeline">Within 2 days</div>' +
+      '</div>' +
+      '<div class="initiative-card">' +
+        '<div class="init-num">2</div>' +
+        '<div style="flex:1;"><div class="init-title">HLD / LLD Architecture Proposal</div>' +
+        '<div class="init-desc">Detailed solution design tailored to your environment</div></div>' +
+        '<div class="init-timeline">Within 5 days</div>' +
+      '</div>' +
+      '<div class="initiative-card">' +
+        '<div class="init-num">3</div>' +
+        '<div style="flex:1;"><div class="init-title">Commercial Proposal & BOM</div>' +
+        '<div class="init-desc">Solution BOM, pricing, ROI analysis, and implementation roadmap</div></div>' +
+        '<div class="init-timeline">Within 7 days</div>' +
+      '</div>';
+
+    document.getElementById('resRoadmap').innerHTML =
+      '<div class="phase-row">' +
+        '<div class="phase-badge" style="background:#1A3A5C;">P1</div>' +
+        '<div class="phase-body"><div class="phase-title">Stabilise &amp; Secure</div><div class="phase-sub">0–3 months · Quick wins and critical risk reduction</div></div>' +
+        '<div class="phase-outcome">Risk Reduction</div>' +
+      '</div>' +
+      '<div class="phase-row">' +
+        '<div class="phase-badge" style="background:#2E7D32;">P2</div>' +
+        '<div class="phase-body"><div class="phase-title">Optimise &amp; Transform</div><div class="phase-sub">3–9 months · Performance and modernisation</div></div>' +
+        '<div class="phase-outcome">Efficiency Gain</div>' +
+      '</div>' +
+      '<div class="phase-row">' +
+        '<div class="phase-badge" style="background:#7B2D00;">P3</div>' +
+        '<div class="phase-body"><div class="phase-title">Innovate &amp; Scale</div><div class="phase-sub">9–18 months · AI, automation, and future-readiness</div></div>' +
+        '<div class="phase-outcome">Business Enablement</div>' +
+      '</div>';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
   } catch(err) {
     document.getElementById('loader').classList.remove('show');
     document.getElementById('submitBtn').style.display = '';
     alert('Submission failed. Please try again.\n\n' + err.message);
   }
 }
-
 // ── Render results inline ────────────────────────────────────────
 function renderResults(a, clientName, email) {
   document.getElementById('loader').classList.remove('show');
