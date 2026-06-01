@@ -15,13 +15,10 @@
   body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;}
   body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(201,168,76,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(26,58,92,0.4) 0%,transparent 60%);pointer-events:none;z-index:0;}
 
-  /* ── SCREEN SYSTEM ── */
   .screen{display:none;position:relative;z-index:1;min-height:100vh;}
   .screen.active{display:block;}
 
-  /* ══════════════════════════════
-     SCREEN 1 — Welcome / Details
-  ══════════════════════════════ */
+  /* SCREEN 1 */
   .welcome-wrap{max-width:680px;margin:0 auto;padding:60px 40px 80px;}
   .welcome-badge{display:inline-block;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:20px;}
   .welcome-wrap h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);color:var(--white);line-height:1.2;margin-bottom:12px;}
@@ -30,7 +27,6 @@
   .welcome-meta{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:40px;}
   .meta-chip{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.6);font-size:12px;}
   .meta-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);}
-
   .details-card{background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.25);border-radius:16px;padding:28px 32px;}
   .details-title{font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
   .details-title::after{content:'';flex:1;height:1px;background:rgba(201,168,76,0.2);}
@@ -40,14 +36,11 @@
   .field-group input{padding:12px 16px;border:1.5px solid rgba(255,255,255,0.12);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--white);background:rgba(255,255,255,0.07);outline:none;transition:all 0.2s;}
   .field-group input::placeholder{color:rgba(255,255,255,0.28);}
   .field-group input:focus{border-color:var(--gold);background:rgba(255,255,255,0.1);box-shadow:0 0 0 3px rgba(201,168,76,0.1);}
-  .start-btn{width:100%;padding:15px;background:var(--gold);color:var(--navy);border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;letter-spacing:0.3px;}
+  .start-btn{width:100%;padding:15px;background:var(--gold);color:var(--navy);border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;}
   .start-btn:hover{background:#b8943e;transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,0.35);}
   .start-hint{text-align:center;color:rgba(255,255,255,0.3);font-size:12px;margin-top:12px;}
 
-  /* ══════════════════════════════
-     SCREEN 2 — Sections
-  ══════════════════════════════ */
-  /* Slim top bar */
+  /* SCREEN 2 */
   .topbar{background:linear-gradient(135deg,var(--navy) 0%,#0f2744 100%);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:100;}
   .topbar-inner{max-width:1000px;margin:0 auto;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
   .topbar-brand{font-family:'Playfair Display',serif;color:var(--white);font-size:16px;}
@@ -60,27 +53,21 @@
   .progress-row{display:flex;justify-content:space-between;color:rgba(255,255,255,0.4);font-size:11px;margin-bottom:6px;}
   .progress-bar{height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
   .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#e8c56a);border-radius:2px;transition:width 0.4s ease;width:0%;}
-
-  /* Main content area */
   .sections-main{max-width:1000px;margin:0 auto;padding:28px 40px 80px;}
   .tab-nav{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
   .tab-btn{padding:8px 15px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
   .tab-btn:hover{background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.3);color:var(--gold);}
   .tab-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:600;}
   .tab-btn.done{background:rgba(46,125,50,0.15);border-color:rgba(46,125,50,0.4);color:#4caf50;}
-
-  /* Section card */
   .section-card{background:var(--white);border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.3);display:none;animation:slideUp 0.35s ease both;}
   .section-card.active{display:block;}
   @keyframes slideUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
   .section-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);padding:24px 32px;border-bottom:3px solid var(--gold);}
   .section-header h3{font-family:'Playfair Display',serif;color:var(--white);font-size:22px;margin-bottom:4px;}
   .section-header p{color:rgba(255,255,255,0.5);font-size:13px;}
-
   .category-divider{display:flex;align-items:center;gap:12px;padding:9px 32px;background:var(--ice);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .category-divider span{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--navy2);}
   .category-divider::after{content:'';flex:1;height:1px;background:var(--border);}
-
   .question-row{padding:18px 32px;border-bottom:1px solid #f0f3f8;transition:background 0.15s;}
   .question-row:hover{background:#fafbfe;}
   .question-row:last-child{border-bottom:none;}
@@ -91,15 +78,12 @@
   .priority-badge.high{background:rgba(46,125,50,0.12);color:var(--green);}
   .priority-badge.medium{background:rgba(245,127,23,0.12);color:var(--amber);}
   .priority-badge.low{background:rgba(21,101,192,0.12);color:var(--blue);}
-
   .q-fields-full{display:grid;grid-template-columns:1fr;gap:8px;}
   .q-fields-split{display:grid;grid-template-columns:1fr 150px;gap:10px;}
   textarea{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:#fafbfe;outline:none;transition:border-color 0.2s,box-shadow 0.2s;resize:vertical;min-height:52px;width:100%;}
   textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1);background:var(--white);}
   select{padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);background:#fafbfe;outline:none;cursor:pointer;}
   select:focus{border-color:var(--gold);}
-
-  /* Upload */
   .upload-zone{border:2px dashed var(--border);border-radius:10px;padding:12px 14px;background:#fafbfe;cursor:pointer;transition:all 0.2s;position:relative;display:flex;align-items:center;gap:10px;margin-top:6px;}
   .upload-zone:hover{border-color:var(--gold);background:var(--gold-light);}
   .upload-zone.has-files{border-color:var(--green);background:rgba(46,125,50,0.04);}
@@ -112,13 +96,12 @@
   .file-chip{background:var(--ice);border:1px solid var(--border);border-radius:6px;padding:3px 10px 3px 8px;font-size:11px;color:var(--navy);display:flex;align-items:center;gap:5px;}
   .file-chip .remove{cursor:pointer;color:#999;font-size:13px;line-height:1;}
   .file-chip .remove:hover{color:red;}
-
   .section-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;background:#f8fafc;border-top:1px solid var(--border);}
   .btn{padding:10px 22px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;}
   .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
   .btn-outline:hover{border-color:var(--navy2);color:var(--navy);}
   .btn-primary{background:var(--navy);color:var(--white);}
-  .btn-primary:hover{background:var(--navy2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(13,27,42,0.3);}
+  .btn-primary:hover{background:var(--navy2);transform:translateY(-1px);}
   .btn-gold{background:var(--gold);color:var(--navy);}
   .btn-gold:hover{background:#b8943e;transform:translateY(-1px);}
 
@@ -127,7 +110,6 @@
   .submit-card.active{display:block;}
   .submit-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;}
   .submit-card h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-bottom:10px;}
-  .submit-card>div>p{color:var(--muted);font-size:14px;max-width:500px;margin:0 auto 28px;line-height:1.7;}
   .summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:28px;text-align:left;}
   .summary-item{background:var(--ice);border-radius:10px;padding:14px 16px;}
   .summary-item .s-val{font-size:20px;font-weight:700;color:var(--navy);font-family:'Playfair Display',serif;}
@@ -137,11 +119,40 @@
   .loader-msg{font-size:13px;color:var(--muted);}
   .spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
-  .success-state{display:none;text-align:center;padding:20px;}
-  .success-state.show{display:block;}
-  .success-circle{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#2E7D32,#4caf50);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:36px;animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;}
-  @keyframes popIn{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
 
+  /* Results panel */
+  .results-panel{display:none;text-align:left;}
+  .results-panel.show{display:block;}
+  .res-hero{background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:32px;margin-bottom:20px;text-align:center;}
+  .res-hero h2{font-family:'Playfair Display',serif;color:white;font-size:26px;margin-bottom:8px;}
+  .res-hero p{color:rgba(255,255,255,0.6);font-size:13px;max-width:480px;margin:0 auto;}
+  .res-check{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#2E7D32,#4caf50);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:30px;animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;}
+  @keyframes popIn{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  .res-card{background:#f8fafc;border:1px solid #dde4ef;border-radius:12px;padding:20px;}
+  .res-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;}
+  .res-score{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:#0D1B2A;line-height:1;}
+  .res-tag{display:inline-block;background:#EAF1FB;color:#1A3A5C;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;margin-top:8px;}
+  .res-section{border-radius:12px;padding:20px;margin-bottom:16px;}
+  .res-section-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+  .strength-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;color:#374151;}
+  .strength-row:last-child{border-bottom:none;}
+  .initiative-card{background:white;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;}
+  .init-num{background:#1A3A5C;color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;}
+  .init-title{font-weight:700;color:#1A3A5C;margin-bottom:4px;font-size:14px;}
+  .init-desc{color:#6b7280;font-size:13px;}
+  .init-timeline{background:#e0f2fe;color:#0369a1;padding:3px 10px;border-radius:20px;font-size:12px;white-space:nowrap;margin-left:auto;flex-shrink:0;}
+  .phase-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+  .phase-badge{border-radius:8px;padding:7px 12px;font-weight:700;font-size:12px;color:white;white-space:nowrap;flex-shrink:0;}
+  .phase-body{flex:1;background:#f8fafc;border-radius:8px;padding:12px;}
+  .phase-title{font-weight:700;color:#1e293b;font-size:14px;}
+  .phase-sub{color:#6b7280;font-size:12px;margin-top:3px;}
+  .phase-outcome{background:#f0fdf4;color:#166534;padding:5px 12px;border-radius:8px;font-size:12px;white-space:nowrap;flex-shrink:0;}
+  .res-banner{background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:28px;text-align:center;margin-top:4px;}
+  .res-banner h3{font-family:'Playfair Display',serif;color:white;font-size:20px;margin-bottom:10px;}
+  .res-banner p{color:rgba(255,255,255,0.6);font-size:13px;max-width:460px;margin:0 auto 16px;line-height:1.7;}
+  .banner-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+  .banner-pill{background:rgba(201,168,76,0.2);color:#C9A84C;padding:7px 14px;border-radius:8px;font-size:12px;}
   .footer{text-align:center;color:rgba(255,255,255,0.2);font-size:11px;padding:24px 40px;}
 
   @media(max-width:700px){
@@ -153,14 +164,13 @@
     .question-row,.section-nav{padding:14px 18px;}
     .section-header{padding:18px 20px;}
     .q-fields-split{grid-template-columns:1fr;}
+    .res-grid{grid-template-columns:1fr;}
   }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════
-     SCREEN 1 — Welcome & Details
-══════════════════════════════ -->
+<!-- SCREEN 1 — Welcome -->
 <div class="screen active" id="screen-welcome">
   <div class="welcome-wrap">
     <div class="welcome-badge">Confidential Discovery Document</div>
@@ -172,47 +182,30 @@
       <div class="meta-chip"><div class="dot"></div>~20 min to complete</div>
       <div class="meta-chip"><div class="dot"></div>Files saved to Google Drive</div>
     </div>
-
     <div class="details-card">
       <div class="details-title">Tell us about yourself</div>
       <div class="details-grid">
-        <div class="field-group">
-          <label>Company Name *</label>
-          <input type="text" id="clientName" placeholder="e.g. Acme Corporation"/>
-        </div>
-        <div class="field-group">
-          <label>Contact Name *</label>
-          <input type="text" id="contactName" placeholder="e.g. Rajesh Kumar"/>
-        </div>
-        <div class="field-group">
-          <label>Email Address *</label>
-          <input type="email" id="contactEmail" placeholder="e.g. rajesh@acme.com"/>
-        </div>
-        <div class="field-group">
-          <label>Date</label>
-          <input type="text" id="fillDate"/>
-        </div>
+        <div class="field-group"><label>Company Name *</label><input type="text" id="clientName" placeholder="e.g. Acme Corporation"/></div>
+        <div class="field-group"><label>Contact Name *</label><input type="text" id="contactName" placeholder="e.g. Rajesh Kumar"/></div>
+        <div class="field-group"><label>Email Address *</label><input type="email" id="contactEmail" placeholder="e.g. rajesh@acme.com"/></div>
+        <div class="field-group"><label>Date</label><input type="text" id="fillDate"/></div>
       </div>
-      <button class="start-btn" onclick="startForm()">Begin Discovery Checklist →</button>
+      <button class="start-btn" onclick="startForm()">Begin Discovery Checklist &#8594;</button>
       <p class="start-hint">All information is treated as strictly confidential</p>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════
-     SCREEN 2 — Sections
-══════════════════════════════ -->
+<!-- SCREEN 2 — Sections -->
 <div class="screen" id="screen-sections">
-
-  <!-- Slim sticky top bar -->
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="topbar-brand">DNISPL · <span>Discovery</span></div>
+      <div class="topbar-brand">DNISPL &middot; <span>Discovery</span></div>
       <div class="topbar-client">
         <div class="client-avatar" id="clientAvatar">?</div>
         <div>
-          <div class="client-name-label" id="clientNameLabel">—</div>
-          <div class="client-email-label" id="clientEmailLabel">—</div>
+          <div class="client-name-label" id="clientNameLabel">&#8212;</div>
+          <div class="client-email-label" id="clientEmailLabel">&#8212;</div>
         </div>
       </div>
     </div>
@@ -226,107 +219,113 @@
     <div class="tab-nav" id="tabNav"></div>
     <div id="sections"></div>
 
-    <!-- Submit -->
+    <!-- Submit card -->
     <div class="submit-card" id="submitCard">
+      <!-- Pre-submit state -->
       <div id="formState">
-        <div class="submit-icon">📋</div>
+        <div class="submit-icon">&#128203;</div>
         <h2>Ready to Submit</h2>
-        <p>Your responses and uploaded files will be saved to our secure Google Drive — organised in a dedicated folder for your company.</p>
+        <p style="color:var(--muted);font-size:14px;max-width:500px;margin:0 auto 24px;line-height:1.7;">Your responses and files will be saved to our secure Google Drive and analysed by Gemini AI to generate your personalised IT roadmap.</p>
         <div class="summary-grid" id="summaryGrid"></div>
-        <div class="loader" id="loader"><div class="spinner"></div><div class="loader-msg" id="loaderMsg">Submitting…</div></div>
-        <button class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="font-size:15px;padding:13px 36px;">Submit to DNISPL Team →</button>
+        <div class="loader" id="loader">
+          <div class="spinner"></div>
+          <div class="loader-msg" id="loaderMsg">Submitting&#8230;</div>
+        </div>
+        <button class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="font-size:15px;padding:13px 36px;">Submit to DNISPL Team &#8594;</button>
         <p style="margin-top:12px;font-size:12px;color:#bbb;">All data is transmitted securely and treated as strictly confidential.</p>
       </div>
-      <!-- Rich client-facing summary after submission -->
-      <div class="success-state" id="successState">
 
-        <!-- Header -->
-        <div style="background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:32px;margin-bottom:24px;text-align:center;">
-          <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#2E7D32,#4caf50);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:36px;animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;">✓</div>
-          <h2 style="font-family:'Playfair Display',serif;color:white;font-size:28px;margin-bottom:8px;">Thank You, <span id="summaryClientName" style="color:#C9A84C;">—</span>!</h2>
-          <p style="color:rgba(255,255,255,0.6);font-size:14px;max-width:480px;margin:0 auto;line-height:1.6;">Your discovery responses have been received. Our team is analysing your IT environment and will present a detailed roadmap shortly.</p>
+      <!-- Results state (shown after successful submission) -->
+      <div class="results-panel" id="resultsPanel">
+
+        <!-- Hero -->
+        <div class="res-hero">
+          <div class="res-check">&#10003;</div>
+          <h2>Thank You, <span id="resClientName" style="color:#C9A84C;">&#8212;</span>!</h2>
+          <p>Your discovery responses have been received and analysed by our AI engine. Here is your personalised IT maturity assessment.</p>
         </div>
 
-        <!-- Maturity score -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;text-align:left;">
-          <div style="background:#f8fafc;border:1px solid #dde4ef;border-radius:12px;padding:20px;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">IT Maturity Score</div>
-            <div style="display:flex;align-items:flex-end;gap:8px;margin-bottom:10px;">
-              <div id="summaryScore" style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:#0D1B2A;line-height:1;">—</div>
-              <div style="font-size:14px;color:#6b7280;margin-bottom:8px;">/ 10</div>
-            </div>
-            <div id="summaryMaturityLabel" style="display:inline-block;background:#EAF1FB;color:#1A3A5C;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;">—</div>
+        <!-- Score + Summary -->
+        <div class="res-grid">
+          <div class="res-card">
+            <div class="res-label">IT Maturity Score</div>
+            <div class="res-score" id="resScore">&#8212;</div>
+            <div style="color:#6b7280;font-size:13px;margin-bottom:6px;">out of 10</div>
+            <div class="res-tag" id="resLabel">&#8212;</div>
           </div>
-          <div style="background:#f8fafc;border:1px solid #dde4ef;border-radius:12px;padding:20px;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">Assessment Summary</div>
-            <p id="summaryExec" style="font-size:13px;color:#374151;line-height:1.6;">—</p>
+          <div class="res-card">
+            <div class="res-label">Assessment Summary</div>
+            <p id="resExec" style="font-size:13px;color:#374151;line-height:1.6;">&#8212;</p>
           </div>
         </div>
 
-        <!-- Key strengths -->
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px;margin-bottom:20px;text-align:left;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#2E7D32;margin-bottom:12px;">✅ Your Key Strengths</div>
-          <div id="summaryStrengths"></div>
+        <!-- Strengths -->
+        <div class="res-section" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+          <div class="res-section-title" style="color:#2E7D32;">&#9989; Your Key Strengths</div>
+          <div id="resStrengths"></div>
         </div>
 
-        <!-- Top initiatives -->
-        <div style="background:#EAF1FB;border:1px solid #bdd0e8;border-radius:12px;padding:20px;margin-bottom:20px;text-align:left;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1A3A5C;margin-bottom:12px;">🎯 Top Recommended Initiatives</div>
-          <div id="summaryInitiatives"></div>
+        <!-- Initiatives -->
+        <div class="res-section" style="background:#EAF1FB;border:1px solid #bdd0e8;">
+          <div class="res-section-title" style="color:#1A3A5C;">&#127919; Top Recommended Initiatives</div>
+          <div id="resInitiatives"></div>
         </div>
 
-        <!-- Roadmap preview -->
-        <div style="background:#fdf8ee;border:1px solid #e8d8a0;border-radius:12px;padding:20px;margin-bottom:24px;text-align:left;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;">🗺️ Your Proposed Roadmap</div>
-          <div id="summaryRoadmap" style="display:grid;gap:10px;"></div>
+        <!-- Roadmap -->
+        <div class="res-section" style="background:#fdf8ee;border:1px solid #e8d8a0;">
+          <div class="res-section-title" style="color:#C9A84C;">&#128506; Your Proposed Roadmap</div>
+          <div id="resRoadmap"></div>
         </div>
 
-        <!-- DNISPL next step banner -->
-        <div style="background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:28px;text-align:center;">
-          <div style="font-size:28px;margin-bottom:12px;">📊</div>
-          <h3 style="font-family:'Playfair Display',serif;color:white;font-size:20px;margin-bottom:10px;">DNISPL will present a detailed roadmap</h3>
-          <p style="color:rgba(255,255,255,0.6);font-size:13px;max-width:460px;margin:0 auto 16px;line-height:1.7;">Our solutions architects are preparing a comprehensive presentation covering architecture designs, solution recommendations, implementation plan, and commercial proposal — tailored specifically for <span id="summaryClientName2" style="color:#C9A84C;">your organisation</span>.</p>
-          <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px;">
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> HLD / LLD Architecture</div>
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> Solution BOM & Pricing</div>
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> Implementation Roadmap</div>
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> ROI Analysis</div>
+        <!-- DNISPL Banner -->
+        <div class="res-banner">
+          <div style="font-size:32px;margin-bottom:12px;">&#128202;</div>
+          <h3>DNISPL will present a detailed roadmap</h3>
+          <p>Our solutions architects are preparing a comprehensive presentation covering HLD/LLD architecture, solution BOM &amp; pricing, implementation plan, and ROI analysis &#8212; tailored specifically for <span id="resClientName2" style="color:#C9A84C;">your organisation</span>.</p>
+          <div class="banner-pills">
+            <div class="banner-pill">&#9679; HLD / LLD Architecture</div>
+            <div class="banner-pill">&#9679; Solution BOM &amp; Pricing</div>
+            <div class="banner-pill">&#9679; Implementation Roadmap</div>
+            <div class="banner-pill">&#9679; ROI Analysis</div>
           </div>
-          <p style="color:rgba(255,255,255,0.4);font-size:12px;margin-top:20px;">Expect to hear from us within 2 business days · <span id="summaryEmail" style="color:#C9A84C;"></span></p>
+          <p style="color:rgba(255,255,255,0.4);font-size:12px;">Expect to hear from us within 2 business days &middot; <span id="resEmail" style="color:#C9A84C;"></span></p>
         </div>
 
-      </div>
-    </div>
+      </div><!-- /results-panel -->
+    </div><!-- /submit-card -->
   </div>
 
-  <div class="footer">© 2025 DNISPL · Confidential & Proprietary · Not for Distribution</div>
+  <div class="footer">&#169; 2025 DNISPL &middot; Confidential &amp; Proprietary &middot; Not for Distribution</div>
 </div>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhcxb1eyMVayb2cjhkRZtmB7IiOwC8woafMYMm7nwvHHS7r2lCuaypNJASo8c-0P50OQ/exec";
-const ACCEPTED = ".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.docx,.vsd,.vsdx";
-const MAX_MB = 10;
-const uploadedFiles = {};
+// ── NOTE: When hosted inside Apps Script, fetch() calls back to the same
+//    deployment URL work without CORS issues. ──────────────────────────────
+var SCRIPT_URL = window.location.href.split('?')[0];
 
-const SECTIONS = [
+var ACCEPTED = ".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.docx,.vsd,.vsdx";
+var MAX_MB = 10;
+var uploadedFiles = {};
+
+var SECTIONS = [
   {
-    id:"business", icon:"🏢", title:"Business & Strategy",
+    id:"business", icon:"&#127970;", title:"Business & Strategy",
     desc:"Understand your business context, goals, and current challenges.",
     rows:[
       {cat:"Business Overview",  item:"Industry vertical",            noPriority:true},
       {cat:"Business Overview",  item:"Number of locations / sites",  noPriority:true},
       {cat:"Business Overview",  item:"Total employee count",         noPriority:true},
-      {cat:"Business Overview",  item:"Growth plans (1–5 years)",     noPriority:true},
+      {cat:"Business Overview",  item:"Growth plans (1-5 years)",     noPriority:true},
       {cat:"Business Drivers",   item:"Digital transformation goals", priority:"high"},
       {cat:"Business Drivers",   item:"Cost optimisation initiatives",priority:"medium"},
       {cat:"Business Drivers",   item:"Cloud migration plans",        priority:"medium"},
       {cat:"Current Challenges", item:"Top 3 IT pain points",         priority:"high"},
       {cat:"Current Challenges", item:"Security concerns",            priority:"high"},
-      {cat:"Current Challenges", item:"Legacy systems in use",        priority:"medium"},
+      {cat:"Current Challenges", item:"Legacy systems in use",        priority:"medium"}
     ]
   },
   {
-    id:"it", icon:"🖥️", title:"IT Landscape",
+    id:"it", icon:"&#128421;", title:"IT Landscape",
     desc:"Map the existing IT environment, team structure, and documentation.",
     rows:[
       {cat:"IT Organisation", item:"Internal IT team structure",      noPriority:true},
@@ -335,11 +334,11 @@ const SECTIONS = [
       {cat:"Documentation",   item:"Network diagrams",                priority:"medium", upload:true},
       {cat:"Documentation",   item:"IP schema / addressing plan",     priority:"high",   upload:true},
       {cat:"Documentation",   item:"Asset inventory",                 priority:"medium", upload:true},
-      {cat:"Documentation",   item:"Change management process",       priority:"low"},
+      {cat:"Documentation",   item:"Change management process",       priority:"low"}
     ]
   },
   {
-    id:"network", icon:"🌐", title:"Network & SD-WAN",
+    id:"network", icon:"&#127760;", title:"Network & SD-WAN",
     desc:"Assess the network topology, SD-WAN needs, and connectivity.",
     rows:[
       {cat:"LAN",      item:"Core / distribution / access topology",  priority:"high",   upload:true},
@@ -353,11 +352,11 @@ const SECTIONS = [
       {cat:"SD-WAN",   item:"Centralised orchestration needs",        priority:"medium"},
       {cat:"SD-WAN",   item:"SASE integration plans",                 priority:"medium"},
       {cat:"WAN",      item:"Number of WAN links / ISPs",             noPriority:true},
-      {cat:"WAN",      item:"Current bandwidth per site",             noPriority:true},
+      {cat:"WAN",      item:"Current bandwidth per site",             noPriority:true}
     ]
   },
   {
-    id:"dc", icon:"☁️", title:"Data Centre & Cloud",
+    id:"dc", icon:"&#9729;", title:"Data Centre & Cloud",
     desc:"Inventory compute, storage, and cloud workloads.",
     rows:[
       {cat:"Compute",   item:"Physical server inventory",             priority:"high",   upload:true},
@@ -369,11 +368,11 @@ const SECTIONS = [
       {cat:"Cloud",     item:"Hybrid / multi-cloud architecture",     priority:"medium", upload:true},
       {cat:"Cloud",     item:"Cloud migration readiness",             priority:"high"},
       {cat:"Migration", item:"Application dependencies mapping",      priority:"high",   upload:true},
-      {cat:"Migration", item:"Migration timeline expectations",       priority:"medium"},
+      {cat:"Migration", item:"Migration timeline expectations",       priority:"medium"}
     ]
   },
   {
-    id:"security", icon:"🔒", title:"Security",
+    id:"security", icon:"&#128274;", title:"Security",
     desc:"Evaluate security posture, identity controls, and compliance.",
     rows:[
       {cat:"Security Architecture", item:"Firewall architecture diagram",    priority:"high",  upload:true},
@@ -384,11 +383,11 @@ const SECTIONS = [
       {cat:"Identity",              item:"Privileged access management",     priority:"medium"},
       {cat:"Compliance",            item:"ISO / PCI / GDPR requirements",    priority:"high",  upload:true},
       {cat:"Compliance",            item:"CERT-In compliance requirements",  priority:"high"},
-      {cat:"Compliance",            item:"Last security audit report",       noPriority:true,  upload:true},
+      {cat:"Compliance",            item:"Last security audit report",       noPriority:true,  upload:true}
     ]
   },
   {
-    id:"enduser", icon:"💼", title:"End User & Apps",
+    id:"enduser", icon:"&#128188;", title:"End User & Apps",
     desc:"Document end-user devices, collaboration tools, and enterprise apps.",
     rows:[
       {cat:"End User Devices", item:"Laptop / desktop count",                   noPriority:true},
@@ -398,11 +397,11 @@ const SECTIONS = [
       {cat:"Collaboration",    item:"Voice / telephony systems",                noPriority:true},
       {cat:"Applications",     item:"ERP / CRM / HRMS landscape",               priority:"high",  upload:true},
       {cat:"Applications",     item:"Business-critical applications list",      priority:"high",  upload:true},
-      {cat:"Applications",     item:"Custom / in-house developed apps",         priority:"medium"},
+      {cat:"Applications",     item:"Custom / in-house developed apps",         priority:"medium"}
     ]
   },
   {
-    id:"backup", icon:"🛡️", title:"Backup, DR & Ops",
+    id:"backup", icon:"&#128737;", title:"Backup, DR & Ops",
     desc:"Define recovery objectives, monitoring tools, and automation.",
     rows:[
       {cat:"Backup",            item:"Backup vendors / tools in use",           noPriority:true},
@@ -414,11 +413,11 @@ const SECTIONS = [
       {cat:"Monitoring",        item:"NMS / SIEM tools in use",                 noPriority:true},
       {cat:"Monitoring",        item:"AIOps / observability usage",             priority:"low"},
       {cat:"Automation",        item:"Automation tools (Ansible / Terraform)",  noPriority:true},
-      {cat:"Automation",        item:"Provisioning automation maturity",        priority:"medium"},
+      {cat:"Automation",        item:"Provisioning automation maturity",        priority:"medium"}
     ]
   },
   {
-    id:"commercial", icon:"📊", title:"Commercial & Roadmap",
+    id:"commercial", icon:"&#128202;", title:"Commercial & Roadmap",
     desc:"Align budget, vendor preferences, and deliverable expectations.",
     rows:[
       {cat:"Financial",        item:"Annual IT budget (approx)",           noPriority:true},
@@ -430,273 +429,323 @@ const SECTIONS = [
       {cat:"Future State",     item:"AI / ML enablement goals",            priority:"low"},
       {cat:"Future State",     item:"3-year IT transformation vision",     priority:"medium"},
       {cat:"Deliverables",     item:"HLD / LLD / BOM requirements",        priority:"high"},
-      {cat:"Deliverables",     item:"Migration roadmap needed",            priority:"high"},
+      {cat:"Deliverables",     item:"Migration roadmap needed",            priority:"high"}
     ]
-  },
+  }
 ];
 
-// ── Screen 1: Start ─────────────────────────────────────────────
+// ── Screen 1 ────────────────────────────────────────────────────
 function startForm() {
-  const name  = document.getElementById('clientName').value.trim();
-  const email = document.getElementById('contactEmail').value.trim();
+  var name  = document.getElementById('clientName').value.trim();
+  var email = document.getElementById('contactEmail').value.trim();
   if (!name) { alert('Please enter your company name to continue.'); document.getElementById('clientName').focus(); return; }
-
-  // Populate topbar
   document.getElementById('clientAvatar').textContent = name.charAt(0).toUpperCase();
   document.getElementById('clientNameLabel').textContent = name;
   document.getElementById('clientEmailLabel').textContent = email || 'No email provided';
-
-  // Switch screens
   document.getElementById('screen-welcome').classList.remove('active');
   document.getElementById('screen-sections').classList.add('active');
   window.scrollTo({top:0, behavior:'instant'});
   updateProgress();
 }
 
-// ── Build section tabs & cards ──────────────────────────────────
-const tabNav = document.getElementById('tabNav');
-const sectionsEl = document.getElementById('sections');
+// ── Build sections ───────────────────────────────────────────────
+var tabNav = document.getElementById('tabNav');
+var sectionsEl = document.getElementById('sections');
 
-SECTIONS.forEach((sec, si) => {
-  const tab = document.createElement('button');
-  tab.className = 'tab-btn' + (si===0?' active':'');
-  tab.textContent = sec.icon+' '+sec.title;
-  tab.onclick = () => switchTab(si);
+SECTIONS.forEach(function(sec, si) {
+  var tab = document.createElement('button');
+  tab.className = 'tab-btn' + (si === 0 ? ' active' : '');
+  tab.innerHTML = sec.icon + ' ' + sec.title;
+  tab.onclick = (function(i){ return function(){ switchTab(i); }; })(si);
   tabNav.appendChild(tab);
 
-  const card = document.createElement('div');
-  card.className = 'section-card'+(si===0?' active':'');
-  card.id = 'sec-'+si;
+  var card = document.createElement('div');
+  card.className = 'section-card' + (si === 0 ? ' active' : '');
+  card.id = 'sec-' + si;
 
-  let lastCat=null, qNum=0, rowsHTML='';
-  sec.rows.forEach((row,ri) => {
+  var lastCat = null, qNum = 0, rowsHTML = '';
+  sec.rows.forEach(function(row, ri) {
     qNum++;
-    if (row.cat!==lastCat) { lastCat=row.cat; rowsHTML+=`<div class="category-divider"><span>${row.cat}</span></div>`; }
-
-    const badge = row.noPriority ? '' : `<div class="priority-badge ${row.priority}">${row.priority}</div>`;
-    const prioSelect = row.noPriority ? '' : `
-      <select id="prio-${si}-${ri}">
-        <option value="High"   ${row.priority==='high'  ?'selected':''}>🟢 High</option>
-        <option value="Medium" ${row.priority==='medium'?'selected':''}>🟡 Medium</option>
-        <option value="Low"    ${row.priority==='low'   ?'selected':''}>🔵 Low</option>
-      </select>`;
-
-    const uploadHTML = row.upload ? `
-      <div class="upload-zone" id="zone-${si}-${ri}" onclick="document.getElementById('file-${si}-${ri}').click()">
-        <input type="file" id="file-${si}-${ri}" multiple accept="${ACCEPTED}" onchange="handleFiles('${si}-${ri}',this)" onclick="event.stopPropagation()"/>
-        <div class="upload-icon">📎</div>
-        <div class="upload-text"><div class="u-title">Attach diagram / document</div><div class="u-sub">PDF, PNG, JPG, XLSX, DOCX, Visio · Max 10MB</div></div>
-        <div class="upload-badge" id="badge-${si}-${ri}">Upload</div>
-      </div>
-      <div class="file-list" id="files-${si}-${ri}"></div>` : '';
-
-    const fieldsClass = row.noPriority ? 'q-fields-full' : 'q-fields-split';
-
-    rowsHTML += `
-      <div class="question-row">
-        <div class="q-top">
-          <div class="q-num">${qNum}</div>
-          <div class="q-label">${row.item}</div>
-          ${badge}
-        </div>
-        <div class="${fieldsClass}">
-          <div style="display:flex;flex-direction:column;gap:6px;">
-            <textarea id="resp-${si}-${ri}" placeholder="Enter your response here…" oninput="updateProgress()"></textarea>
-            ${uploadHTML}
-          </div>
-          ${prioSelect}
-        </div>
-      </div>`;
+    if (row.cat !== lastCat) {
+      lastCat = row.cat;
+      rowsHTML += '<div class="category-divider"><span>' + row.cat + '</span></div>';
+    }
+    var badge = row.noPriority ? '' : '<div class="priority-badge ' + row.priority + '">' + row.priority + '</div>';
+    var prioSelect = row.noPriority ? '' :
+      '<select id="prio-' + si + '-' + ri + '">' +
+        '<option value="High"'   + (row.priority === 'high'   ? ' selected' : '') + '>High</option>' +
+        '<option value="Medium"' + (row.priority === 'medium' ? ' selected' : '') + '>Medium</option>' +
+        '<option value="Low"'    + (row.priority === 'low'    ? ' selected' : '') + '>Low</option>' +
+      '</select>';
+    var uploadHTML = row.upload ?
+      '<div class="upload-zone" id="zone-' + si + '-' + ri + '" onclick="document.getElementById(\'file-' + si + '-' + ri + '\').click()">' +
+        '<input type="file" id="file-' + si + '-' + ri + '" multiple accept="' + ACCEPTED + '" onchange="handleFiles(\'' + si + '-' + ri + '\',this)" onclick="event.stopPropagation()"/>' +
+        '<div class="upload-icon">&#128206;</div>' +
+        '<div class="upload-text"><div class="u-title">Attach diagram / document</div><div class="u-sub">PDF, PNG, JPG, XLSX, DOCX, Visio &middot; Max 10MB</div></div>' +
+        '<div class="upload-badge" id="badge-' + si + '-' + ri + '">Upload</div>' +
+      '</div>' +
+      '<div class="file-list" id="files-' + si + '-' + ri + '"></div>' : '';
+    var fieldsClass = row.noPriority ? 'q-fields-full' : 'q-fields-split';
+    rowsHTML +=
+      '<div class="question-row">' +
+        '<div class="q-top">' +
+          '<div class="q-num">' + qNum + '</div>' +
+          '<div class="q-label">' + row.item + '</div>' +
+          badge +
+        '</div>' +
+        '<div class="' + fieldsClass + '">' +
+          '<div style="display:flex;flex-direction:column;gap:6px;">' +
+            '<textarea id="resp-' + si + '-' + ri + '" placeholder="Enter your response here&#8230;" oninput="updateProgress()"></textarea>' +
+            uploadHTML +
+          '</div>' +
+          prioSelect +
+        '</div>' +
+      '</div>';
   });
 
-  const isLast = si===SECTIONS.length-1;
-  card.innerHTML = `
-    <div class="section-header"><h3>${sec.icon} ${sec.title}</h3><p>${sec.desc}</p></div>
-    ${rowsHTML}
-    <div class="section-nav">
-      ${si>0?`<button class="btn btn-outline" onclick="switchTab(${si-1})">← Previous</button>`:'<span></span>'}
-      ${!isLast
-        ?`<button class="btn btn-primary" onclick="switchTab(${si+1})">Next Section →</button>`
-        :`<button class="btn btn-gold" onclick="goToSubmit()">Review & Submit →</button>`}
-    </div>`;
+  var isLast = si === SECTIONS.length - 1;
+  card.innerHTML =
+    '<div class="section-header"><h3>' + sec.icon + ' ' + sec.title + '</h3><p>' + sec.desc + '</p></div>' +
+    rowsHTML +
+    '<div class="section-nav">' +
+      (si > 0 ? '<button class="btn btn-outline" onclick="switchTab(' + (si-1) + ')">&#8592; Previous</button>' : '<span></span>') +
+      (!isLast
+        ? '<button class="btn btn-primary" onclick="switchTab(' + (si+1) + ')">Next Section &#8594;</button>'
+        : '<button class="btn btn-gold" onclick="goToSubmit()">Review &amp; Submit &#8594;</button>') +
+    '</div>';
   sectionsEl.appendChild(card);
 });
 
-const submitTab = document.createElement('button');
-submitTab.className='tab-btn';
-submitTab.textContent='✅ Submit';
-submitTab.onclick=()=>goToSubmit();
+var submitTab = document.createElement('button');
+submitTab.className = 'tab-btn';
+submitTab.textContent = 'Submit';
+submitTab.onclick = function(){ goToSubmit(); };
 tabNav.appendChild(submitTab);
 
-// ── Tab switching ───────────────────────────────────────────────
+// ── Tab switching ────────────────────────────────────────────────
 function switchTab(idx) {
-  document.querySelectorAll('.tab-btn').forEach((t,i)=>{
+  document.querySelectorAll('.tab-btn').forEach(function(t, i) {
     t.classList.remove('active');
-    if (i<SECTIONS.length) t.classList.toggle('done', isSectionFilled(i)&&i!==idx);
+    if (i < SECTIONS.length) t.classList.toggle('done', isSectionFilled(i) && i !== idx);
   });
-  document.querySelectorAll('.section-card').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
   document.getElementById('submitCard').classList.remove('active');
   document.querySelectorAll('.tab-btn')[idx].classList.add('active');
-  const card=document.getElementById('sec-'+idx);
+  var card = document.getElementById('sec-' + idx);
   if (card) card.classList.add('active');
   updateProgress();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function isSectionFilled(si) {
-  return SECTIONS[si].rows.some((_,ri)=>{
-    return document.getElementById(`resp-${si}-${ri}`)?.value.trim() || (uploadedFiles[`${si}-${ri}`]||[]).length>0;
+  return SECTIONS[si].rows.some(function(_, ri) {
+    var t = document.getElementById('resp-' + si + '-' + ri);
+    return (t && t.value.trim()) || (uploadedFiles[si + '-' + ri] || []).length > 0;
   });
 }
 
 function goToSubmit() {
-  document.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.section-card').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.section-card').forEach(function(c){ c.classList.remove('active'); });
   document.getElementById('submitCard').classList.add('active');
-  const tabs=document.querySelectorAll('.tab-btn');
-  tabs[tabs.length-1].classList.add('active');
-  let totalFilled=0,totalQ=0,totalFiles=0;
-  SECTIONS.forEach((sec,si)=>sec.rows.forEach((_,ri)=>{
-    totalQ++;
-    if (document.getElementById(`resp-${si}-${ri}`)?.value.trim()||(uploadedFiles[`${si}-${ri}`]||[]).length>0) totalFilled++;
-    totalFiles+=(uploadedFiles[`${si}-${ri}`]||[]).length;
-  }));
-  const clientName=document.getElementById('clientName').value||'—';
-  document.getElementById('summaryGrid').innerHTML=`
-    <div class="summary-item"><div class="s-val">${clientName.split(' ')[0]}</div><div class="s-lbl">Client</div></div>
-    <div class="summary-item"><div class="s-val">${SECTIONS.length}</div><div class="s-lbl">Sections</div></div>
-    <div class="summary-item"><div class="s-val">${totalFilled}</div><div class="s-lbl">Answered</div></div>
-    <div class="summary-item"><div class="s-val">${totalFiles}</div><div class="s-lbl">Files</div></div>
-    <div class="summary-item"><div class="s-val">${totalQ-totalFilled}</div><div class="s-lbl">Skipped</div></div>`;
+  var tabs = document.querySelectorAll('.tab-btn');
+  tabs[tabs.length - 1].classList.add('active');
+  var totalFilled = 0, totalQ = 0, totalFiles = 0;
+  SECTIONS.forEach(function(sec, si) {
+    sec.rows.forEach(function(_, ri) {
+      totalQ++;
+      var t = document.getElementById('resp-' + si + '-' + ri);
+      if ((t && t.value.trim()) || (uploadedFiles[si + '-' + ri] || []).length > 0) totalFilled++;
+      totalFiles += (uploadedFiles[si + '-' + ri] || []).length;
+    });
+  });
+  var clientName = document.getElementById('clientName').value || '&#8212;';
+  document.getElementById('summaryGrid').innerHTML =
+    '<div class="summary-item"><div class="s-val">' + clientName.split(' ')[0] + '</div><div class="s-lbl">Client</div></div>' +
+    '<div class="summary-item"><div class="s-val">' + SECTIONS.length + '</div><div class="s-lbl">Sections</div></div>' +
+    '<div class="summary-item"><div class="s-val">' + totalFilled + '</div><div class="s-lbl">Answered</div></div>' +
+    '<div class="summary-item"><div class="s-val">' + totalFiles + '</div><div class="s-lbl">Files</div></div>' +
+    '<div class="summary-item"><div class="s-val">' + (totalQ - totalFilled) + '</div><div class="s-lbl">Skipped</div></div>';
   updateProgress();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function updateProgress() {
-  let filled=0,total=0;
-  SECTIONS.forEach((sec,si)=>sec.rows.forEach((_,ri)=>{
-    total++;
-    if (document.getElementById(`resp-${si}-${ri}`)?.value.trim()||(uploadedFiles[`${si}-${ri}`]||[]).length>0) filled++;
-  }));
-  const pct=Math.round((filled/total)*100);
-  document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-pct').textContent=pct+'%';
+  var filled = 0, total = 0;
+  SECTIONS.forEach(function(sec, si) {
+    sec.rows.forEach(function(_, ri) {
+      total++;
+      var t = document.getElementById('resp-' + si + '-' + ri);
+      if ((t && t.value.trim()) || (uploadedFiles[si + '-' + ri] || []).length > 0) filled++;
+    });
+  });
+  var pct = Math.round((filled / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
 }
 
-// ── File handling ───────────────────────────────────────────────
-function handleFiles(key,input) {
-  if (!uploadedFiles[key]) uploadedFiles[key]=[];
-  Array.from(input.files).forEach(file=>{
-    if (file.size>MAX_MB*1024*1024){alert(`"${file.name}" exceeds ${MAX_MB}MB limit.`);return;}
+// ── File handling ────────────────────────────────────────────────
+function handleFiles(key, input) {
+  if (!uploadedFiles[key]) uploadedFiles[key] = [];
+  Array.from(input.files).forEach(function(file) {
+    if (file.size > MAX_MB * 1024 * 1024) { alert('"' + file.name + '" exceeds ' + MAX_MB + 'MB limit.'); return; }
     uploadedFiles[key].push(file);
   });
-  input.value='';
+  input.value = '';
   renderFileList(key);
   updateProgress();
 }
-
-function removeFile(key,idx) {
-  uploadedFiles[key].splice(idx,1);
+function removeFile(key, idx) {
+  uploadedFiles[key].splice(idx, 1);
   renderFileList(key);
   updateProgress();
 }
-
 function renderFileList(key) {
-  const list=document.getElementById(`files-${key}`);
-  const zone=document.getElementById(`zone-${key}`);
-  const badge=document.getElementById(`badge-${key}`);
-  const files=uploadedFiles[key]||[];
-  list.innerHTML=files.map((f,i)=>`<div class="file-chip">📄 ${f.name} <span class="remove" onclick="removeFile('${key}',${i})">✕</span></div>`).join('');
-  zone.classList.toggle('has-files',files.length>0);
-  badge.textContent=files.length>0?`${files.length} file${files.length>1?'s':''}`:'Upload';
+  var list  = document.getElementById('files-' + key);
+  var zone  = document.getElementById('zone-' + key);
+  var badge = document.getElementById('badge-' + key);
+  var files = uploadedFiles[key] || [];
+  list.innerHTML = files.map(function(f, i) {
+    return '<div class="file-chip">&#128196; ' + f.name + ' <span class="remove" onclick="removeFile(\'' + key + '\',' + i + ')">&#x2715;</span></div>';
+  }).join('');
+  zone.classList.toggle('has-files', files.length > 0);
+  badge.textContent = files.length > 0 ? files.length + ' file' + (files.length > 1 ? 's' : '') : 'Upload';
 }
-
 function fileToBase64(file) {
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onload=()=>resolve(reader.result.split(',')[1]);
-    reader.onerror=reject;
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = function(){ resolve(reader.result.split(',')[1]); };
+    reader.onerror = reject;
     reader.readAsDataURL(file);
   });
 }
 
-// ── Submit ──────────────────────────────────────────────────────
+// ── Submit ───────────────────────────────────────────────────────
 async function submitForm() {
-  const clientName=document.getElementById('clientName').value.trim()||'Unknown';
-  const responses=[];
+  var clientName = document.getElementById('clientName').value.trim() || 'Unknown';
+  var responses = [];
 
-  document.getElementById('submitBtn').style.display='none';
+  document.getElementById('submitBtn').style.display = 'none';
   document.getElementById('loader').classList.add('show');
-  document.getElementById('loaderMsg').textContent='Preparing files for upload…';
+  document.getElementById('loaderMsg').textContent = 'Preparing files for upload&#8230;';
 
-  for (let si=0;si<SECTIONS.length;si++) {
-    const sec=SECTIONS[si];
-    for (let ri=0;ri<sec.rows.length;ri++) {
-      const row=sec.rows[ri];
-      const key=`${si}-${ri}`;
-      const files=uploadedFiles[key]||[];
-      const fileData=[];
-      for (const file of files) {
-        document.getElementById('loaderMsg').textContent=`Encoding "${file.name}"…`;
-        fileData.push({name:file.name,type:file.type,data:await fileToBase64(file)});
+  for (var si = 0; si < SECTIONS.length; si++) {
+    var sec = SECTIONS[si];
+    for (var ri = 0; ri < sec.rows.length; ri++) {
+      var row = sec.rows[ri];
+      var key = si + '-' + ri;
+      var files = uploadedFiles[key] || [];
+      var fileData = [];
+      for (var fi = 0; fi < files.length; fi++) {
+        document.getElementById('loaderMsg').textContent = 'Encoding "' + files[fi].name + '"&#8230;';
+        fileData.push({ name: files[fi].name, type: files[fi].type, data: await fileToBase64(files[fi]) });
       }
+      var ta = document.getElementById('resp-' + si + '-' + ri);
+      var pr = document.getElementById('prio-' + si + '-' + ri);
       responses.push({
-        section:sec.title, category:row.cat, item:row.item,
-        response:document.getElementById(`resp-${si}-${ri}`)?.value.trim()||'',
-        priority:row.noPriority?'N/A':(document.getElementById(`prio-${si}-${ri}`)?.value||''),
-        files:fileData
+        section:  sec.title,
+        category: row.cat,
+        item:     row.item,
+        response: ta ? ta.value.trim() : '',
+        priority: row.noPriority ? 'N/A' : (pr ? pr.value : ''),
+        files:    fileData
       });
     }
   }
 
-  document.getElementById('loaderMsg').textContent = 'Submitting to Google Drive…';
+  document.getElementById('loaderMsg').textContent = 'Analysing with Gemini AI&#8230; (this may take 30-60 seconds)';
 
-  const payload = {
-    clientName,
+  var payload = {
+    clientName:   clientName,
     contactName:  document.getElementById('contactName').value,
     contactEmail: document.getElementById('contactEmail').value,
     fillDate:     document.getElementById('fillDate').value,
-    responses
+    responses:    responses
   };
 
-  // Create a hidden form and submit directly to Apps Script
-  // This bypasses CORS entirely — Apps Script returns the results HTML page
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = SCRIPT_URL;
-  form.target = '_self'; // open in same tab
-
-  const input = document.createElement('input');
-  input.type = 'hidden';
-  input.name = 'payload';
-  input.value = JSON.stringify(payload);
-  form.appendChild(input);
-
-  // Apps Script needs the data in postData.contents
-  // So we send it as the raw body via a workaround using fetch with text/plain
-  // which Apps Script can read via e.postData.contents
-  document.getElementById('loaderMsg').textContent = 'Analysing with Gemini AI…';
-
   try {
-    const res = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
+    var res = await fetch(SCRIPT_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body:    JSON.stringify(payload)
     });
-    const html = await res.text();
-    // Replace current page with the results HTML from Apps Script
-    document.open();
-    document.write(html);
-    document.close();
+    var json = await res.json();
+
+    if (json.success && json.analysis) {
+      renderResults(json.analysis, clientName, document.getElementById('contactEmail').value);
+    } else {
+      throw new Error(json.error || 'Unknown error from server');
+    }
   } catch(err) {
     document.getElementById('loader').classList.remove('show');
     document.getElementById('submitBtn').style.display = '';
-    alert('Submission failed. Please check your connection and try again.\n\n' + err.message);
+    alert('Submission failed. Please try again.\n\n' + err.message);
   }
 }
 
-// ── Init ────────────────────────────────────────────────────────
-document.getElementById('fillDate').value=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+// ── Render results inline ────────────────────────────────────────
+function renderResults(a, clientName, email) {
+  document.getElementById('loader').classList.remove('show');
+  document.getElementById('formState').style.display = 'none';
+  var panel = document.getElementById('resultsPanel');
+  panel.classList.add('show');
+
+  // Hero
+  document.getElementById('resClientName').textContent  = clientName;
+  document.getElementById('resClientName2').textContent = clientName;
+  document.getElementById('resEmail').textContent       = email || '';
+
+  // Score
+  var score = a.maturityScore || '—';
+  var scoreColor = score >= 7 ? '#2E7D32' : score >= 4 ? '#F57F17' : '#c0392b';
+  document.getElementById('resScore').textContent = score;
+  document.getElementById('resScore').style.color = scoreColor;
+  document.getElementById('resLabel').textContent = a.maturityLabel || '—';
+  document.getElementById('resExec').textContent  = a.executiveSummary || '—';
+
+  // Strengths
+  var sHTML = '';
+  (a.keyStrengths || []).forEach(function(s) {
+    sHTML += '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>' + s + '</span></div>';
+  });
+  document.getElementById('resStrengths').innerHTML = sHTML;
+
+  // Initiatives
+  var iHTML = '';
+  (a.prioritisedRecommendations || []).slice(0, 4).forEach(function(r, i) {
+    iHTML +=
+      '<div class="initiative-card">' +
+        '<div class="init-num">' + (i + 1) + '</div>' +
+        '<div style="flex:1;">' +
+          '<div class="init-title">' + r.initiative + '</div>' +
+          '<div class="init-desc">' + r.description + '</div>' +
+        '</div>' +
+        '<div class="init-timeline">' + r.timeline + '</div>' +
+      '</div>';
+  });
+  document.getElementById('resInitiatives').innerHTML = iHTML;
+
+  // Roadmap
+  var phaseColors = ['#1A3A5C', '#2E7D32', '#7B2D00'];
+  var rHTML = '';
+  (a.roadmapPhases || []).forEach(function(p, i) {
+    rHTML +=
+      '<div class="phase-row">' +
+        '<div class="phase-badge" style="background:' + (phaseColors[i] || '#1A3A5C') + ';">' + p.phase.replace('Phase ', 'P') + '</div>' +
+        '<div class="phase-body">' +
+          '<div class="phase-title">' + p.title + '</div>' +
+          '<div class="phase-sub">' + p.duration + ' &bull; ' + (p.initiatives || []).join(', ') + '</div>' +
+        '</div>' +
+        '<div class="phase-outcome">' + p.outcome + '</div>' +
+      '</div>';
+  });
+  document.getElementById('resRoadmap').innerHTML = rHTML;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Init ─────────────────────────────────────────────────────────
+document.getElementById('fillDate').value = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
 </script>
 </body>
 </html>
