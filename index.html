@@ -649,7 +649,7 @@ async function submitForm() {
     }
   }
 
-  document.getElementById('loaderMsg').textContent='Submitting to Google Drive…';
+  document.getElementById('loaderMsg').textContent = 'Submitting to Google Drive…';
 
   const payload = {
     clientName,
@@ -659,88 +659,39 @@ async function submitForm() {
     responses
   };
 
+  // Create a hidden form and submit directly to Apps Script
+  // This bypasses CORS entirely — Apps Script returns the results HTML page
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = SCRIPT_URL;
+  form.target = '_self'; // open in same tab
+
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'payload';
+  input.value = JSON.stringify(payload);
+  form.appendChild(input);
+
+  // Apps Script needs the data in postData.contents
+  // So we send it as the raw body via a workaround using fetch with text/plain
+  // which Apps Script can read via e.postData.contents
+  document.getElementById('loaderMsg').textContent = 'Analysing with Gemini AI…';
+
   try {
-    // Use fetch without no-cors so we can read the Gemini summary back
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     });
-
-    let summary = null;
-    try {
-      const json = await res.json();
-      if (json.clientSummary) summary = json.clientSummary;
-    } catch(e) {}
-
-    document.getElementById('loader').classList.remove('show');
-    document.getElementById('formState').style.display = 'none';
-
-    // Populate rich summary screen
-    const email = document.getElementById('contactEmail').value;
-    document.getElementById('summaryClientName').textContent  = clientName;
-    document.getElementById('summaryClientName2').textContent = clientName;
-    document.getElementById('summaryEmail').textContent       = email || '';
-
-    if (summary) {
-      document.getElementById('summaryScore').textContent        = summary.maturityScore || '—';
-      document.getElementById('summaryMaturityLabel').textContent= summary.maturityLabel || '—';
-      document.getElementById('summaryExec').textContent         = summary.executiveSummary || '—';
-
-      // Strengths
-      document.getElementById('summaryStrengths').innerHTML =
-        (summary.keyStrengths||[]).map(s =>
-          `<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;">
-            <span style="color:#2E7D32;font-size:16px;flex-shrink:0;">✓</span>
-            <span style="font-size:13px;color:#374151;">${s}</span>
-          </div>`).join('');
-
-      // Top initiatives
-      document.getElementById('summaryInitiatives').innerHTML =
-        (summary.topInitiatives||[]).map((r,i) =>
-          `<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:white;border-radius:8px;margin-bottom:8px;">
-            <div style="width:28px;height:28px;border-radius:50%;background:#0D1B2A;color:#C9A84C;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${i+1}</div>
-            <div style="flex:1;font-size:13px;font-weight:600;color:#0D1B2A;">${r.title}</div>
-            <div style="font-size:11px;color:#6b7280;white-space:nowrap;">${r.timeline}</div>
-          </div>`).join('');
-
-      // Roadmap
-      const phaseColors = ['#1A3A5C','#2E7D32','#7B2D00'];
-      document.getElementById('summaryRoadmap').innerHTML =
-        (summary.roadmapPhases||[]).map((p,i) =>
-          `<div style="display:flex;align-items:center;gap:14px;background:white;border-radius:10px;padding:14px 18px;">
-            <div style="width:36px;height:36px;border-radius:50%;background:${phaseColors[i]||'#0D1B2A'};color:#C9A84C;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;text-align:center;line-height:1.2;">${p.phase.replace('Phase ','P')}</div>
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:600;color:#0D1B2A;">${p.title}</div>
-              <div style="font-size:11px;color:#6b7280;margin-top:2px;">${p.duration}</div>
-            </div>
-          </div>`).join('');
-    } else {
-      // Fallback if Gemini didn't return data
-      document.getElementById('summaryScore').textContent = '—';
-      document.getElementById('summaryMaturityLabel').textContent = 'Analysis in progress';
-      document.getElementById('summaryExec').textContent = 'Our team is analysing your responses and will share detailed findings shortly.';
-      document.getElementById('summaryStrengths').innerHTML = '<p style="font-size:13px;color:#6b7280;">Analysis being prepared by DNISPL team.</p>';
-      document.getElementById('summaryInitiatives').innerHTML = '<p style="font-size:13px;color:#6b7280;">Recommendations will be shared in the presentation.</p>';
-      document.getElementById('summaryRoadmap').innerHTML = '<p style="font-size:13px;color:#6b7280;">Roadmap will be presented by our solutions team.</p>';
-    }
-
-    document.getElementById('successState').classList.add('show');
-
+    const html = await res.text();
+    // Replace current page with the results HTML from Apps Script
+    document.open();
+    document.write(html);
+    document.close();
   } catch(err) {
-    // If CORS blocks the response, fall back gracefully
     document.getElementById('loader').classList.remove('show');
-    document.getElementById('formState').style.display = 'none';
-    document.getElementById('summaryClientName').textContent  = clientName;
-    document.getElementById('summaryClientName2').textContent = clientName;
-    document.getElementById('summaryEmail').textContent       = document.getElementById('contactEmail').value || '';
-    document.getElementById('summaryScore').textContent       = '—';
-    document.getElementById('summaryMaturityLabel').textContent = 'Analysis in progress';
-    document.getElementById('summaryExec').textContent        = 'Our team is analysing your responses and will share detailed findings shortly.';
-    document.getElementById('summaryStrengths').innerHTML     = '<p style="font-size:13px;color:#6b7280;">Analysis being prepared by DNISPL team.</p>';
-    document.getElementById('summaryInitiatives').innerHTML   = '<p style="font-size:13px;color:#6b7280;">Recommendations will be shared in the presentation.</p>';
-    document.getElementById('summaryRoadmap').innerHTML       = '<p style="font-size:13px;color:#6b7280;">Roadmap will be presented by our solutions team.</p>';
-    document.getElementById('successState').classList.add('show');
+    document.getElementById('submitBtn').style.display = '';
+    alert('Submission failed. Please check your connection and try again.\n\n' + err.message);
   }
 }
 
@@ -749,4 +700,3 @@ document.getElementById('fillDate').value=new Date().toLocaleDateString('en-GB',
 </script>
 </body>
 </html>
-
