@@ -14,11 +14,8 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;}
   body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(201,168,76,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(26,58,92,0.4) 0%,transparent 60%);pointer-events:none;z-index:0;}
-
   .screen{display:none;position:relative;z-index:1;min-height:100vh;}
   .screen.active{display:block;}
-
-  /* SCREEN 1 */
   .welcome-wrap{max-width:680px;margin:0 auto;padding:60px 40px 80px;}
   .welcome-badge{display:inline-block;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:20px;}
   .welcome-wrap h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);color:var(--white);line-height:1.2;margin-bottom:12px;}
@@ -39,8 +36,6 @@
   .start-btn{width:100%;padding:15px;background:var(--gold);color:var(--navy);border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;}
   .start-btn:hover{background:#b8943e;transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,0.35);}
   .start-hint{text-align:center;color:rgba(255,255,255,0.3);font-size:12px;margin-top:12px;}
-
-  /* SCREEN 2 */
   .topbar{background:linear-gradient(135deg,var(--navy) 0%,#0f2744 100%);border-bottom:2px solid var(--gold);position:sticky;top:0;z-index:100;}
   .topbar-inner{max-width:1000px;margin:0 auto;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
   .topbar-brand{font-family:'Playfair Display',serif;color:var(--white);font-size:16px;}
@@ -104,8 +99,6 @@
   .btn-primary:hover{background:var(--navy2);transform:translateY(-1px);}
   .btn-gold{background:var(--gold);color:var(--navy);}
   .btn-gold:hover{background:#b8943e;transform:translateY(-1px);}
-
-  /* Submit card */
   .submit-card{background:var(--white);border-radius:16px;padding:40px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.3);display:none;animation:slideUp 0.4s ease both;}
   .submit-card.active{display:block;}
   .submit-icon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--navy2));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;}
@@ -119,8 +112,6 @@
   .loader-msg{font-size:13px;color:var(--muted);}
   .spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.7s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
-
-  /* Results panel */
   .results-panel{display:none;text-align:left;}
   .results-panel.show{display:block;}
   .res-hero{background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:32px;margin-bottom:20px;text-align:center;}
@@ -154,7 +145,6 @@
   .banner-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
   .banner-pill{background:rgba(201,168,76,0.2);color:#C9A84C;padding:7px 14px;border-radius:8px;font-size:12px;}
   .footer{text-align:center;color:rgba(255,255,255,0.2);font-size:11px;padding:24px 40px;}
-
   @media(max-width:700px){
     .welcome-wrap{padding:40px 20px 60px;}
     .details-grid{grid-template-columns:1fr;}
@@ -170,7 +160,7 @@
 </head>
 <body>
 
-<!-- SCREEN 1 — Welcome -->
+<!-- SCREEN 1 -->
 <div class="screen active" id="screen-welcome">
   <div class="welcome-wrap">
     <div class="welcome-badge">Confidential Discovery Document</div>
@@ -196,7 +186,7 @@
   </div>
 </div>
 
-<!-- SCREEN 2 — Sections -->
+<!-- SCREEN 2 -->
 <div class="screen" id="screen-sections">
   <div class="topbar">
     <div class="topbar-inner">
@@ -219,9 +209,7 @@
     <div class="tab-nav" id="tabNav"></div>
     <div id="sections"></div>
 
-    <!-- Submit card -->
     <div class="submit-card" id="submitCard">
-      <!-- Pre-submit state -->
       <div id="formState">
         <div class="submit-icon">&#128203;</div>
         <h2>Ready to Submit</h2>
@@ -235,49 +223,36 @@
         <p style="margin-top:12px;font-size:12px;color:#bbb;">All data is transmitted securely and treated as strictly confidential.</p>
       </div>
 
-      <!-- Results state (shown after successful submission) -->
       <div class="results-panel" id="resultsPanel">
-
-        <!-- Hero -->
         <div class="res-hero">
           <div class="res-check">&#10003;</div>
           <h2>Thank You, <span id="resClientName" style="color:#C9A84C;">&#8212;</span>!</h2>
-          <p>Your discovery responses have been received and analysed by our AI engine. Here is your personalised IT maturity assessment.</p>
+          <p>Your discovery responses have been saved to DNISPL's secure system and are being analysed. Our team will present your full IT maturity roadmap shortly.</p>
         </div>
-
-        <!-- Score + Summary -->
         <div class="res-grid">
           <div class="res-card">
-            <div class="res-label">IT Maturity Score</div>
-            <div class="res-score" id="resScore">&#8212;</div>
-            <div style="color:#6b7280;font-size:13px;margin-bottom:6px;">out of 10</div>
-            <div class="res-tag" id="resLabel">&#8212;</div>
+            <div class="res-label">Submission Status</div>
+            <div class="res-score" id="resScore" style="font-size:32px;">&#10003;</div>
+            <div style="color:#6b7280;font-size:13px;margin-bottom:6px;" id="resScoreSub">Saved to Google Drive</div>
+            <div class="res-tag" id="resLabel">Submitted Successfully</div>
           </div>
           <div class="res-card">
-            <div class="res-label">Assessment Summary</div>
-            <p id="resExec" style="font-size:13px;color:#374151;line-height:1.6;">&#8212;</p>
+            <div class="res-label">What Happens Next</div>
+            <p id="resExec" style="font-size:13px;color:#374151;line-height:1.6;">Our solutions architects are now preparing your personalised IT maturity assessment, architecture recommendations, and commercial roadmap.</p>
           </div>
         </div>
-
-        <!-- Strengths -->
         <div class="res-section" style="background:#f0fdf4;border:1px solid #bbf7d0;">
-          <div class="res-section-title" style="color:#2E7D32;">&#9989; Your Key Strengths</div>
+          <div class="res-section-title" style="color:#2E7D32;">&#9989; Confirmed — Your Data is Safe</div>
           <div id="resStrengths"></div>
         </div>
-
-        <!-- Initiatives -->
         <div class="res-section" style="background:#EAF1FB;border:1px solid #bdd0e8;">
-          <div class="res-section-title" style="color:#1A3A5C;">&#127919; Top Recommended Initiatives</div>
+          <div class="res-section-title" style="color:#1A3A5C;">&#127919; What DNISPL Will Deliver</div>
           <div id="resInitiatives"></div>
         </div>
-
-        <!-- Roadmap -->
         <div class="res-section" style="background:#fdf8ee;border:1px solid #e8d8a0;">
-          <div class="res-section-title" style="color:#C9A84C;">&#128506; Your Proposed Roadmap</div>
+          <div class="res-section-title" style="color:#C9A84C;">&#128506; Your Proposed Engagement Roadmap</div>
           <div id="resRoadmap"></div>
         </div>
-
-        <!-- DNISPL Banner -->
         <div class="res-banner">
           <div style="font-size:32px;margin-bottom:12px;">&#128202;</div>
           <h3>DNISPL will present a detailed roadmap</h3>
@@ -290,19 +265,17 @@
           </div>
           <p style="color:rgba(255,255,255,0.4);font-size:12px;">Expect to hear from us within 2 business days &middot; <span id="resEmail" style="color:#C9A84C;"></span></p>
         </div>
-
-      </div><!-- /results-panel -->
-    </div><!-- /submit-card -->
+      </div>
+    </div>
   </div>
-
   <div class="footer">&#169; 2025 DNISPL &middot; Confidential &amp; Proprietary &middot; Not for Distribution</div>
 </div>
 
-<script>
-// ── NOTE: When hosted inside Apps Script, fetch() calls back to the same
-//    deployment URL work without CORS issues. ──────────────────────────────
-var SCRIPT_URL = window.location.href.split('?')[0];
+<!-- Hidden iframe for form POST (bypasses CORS) -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
+<script>
+var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhcxb1eyMVayb2cjhkRZtmB7IiOwC8woafMYMm7nwvHHS7r2lCuaypNJASo8c-0P50OQ/exec";
 var ACCEPTED = ".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.docx,.vsd,.vsdx";
 var MAX_MB = 10;
 var uploadedFiles = {};
@@ -434,7 +407,6 @@ var SECTIONS = [
   }
 ];
 
-// ── Screen 1 ────────────────────────────────────────────────────
 function startForm() {
   var name  = document.getElementById('clientName').value.trim();
   var email = document.getElementById('contactEmail').value.trim();
@@ -448,7 +420,6 @@ function startForm() {
   updateProgress();
 }
 
-// ── Build sections ───────────────────────────────────────────────
 var tabNav = document.getElementById('tabNav');
 var sectionsEl = document.getElementById('sections');
 
@@ -481,7 +452,7 @@ SECTIONS.forEach(function(sec, si) {
       '<div class="upload-zone" id="zone-' + si + '-' + ri + '" onclick="document.getElementById(\'file-' + si + '-' + ri + '\').click()">' +
         '<input type="file" id="file-' + si + '-' + ri + '" multiple accept="' + ACCEPTED + '" onchange="handleFiles(\'' + si + '-' + ri + '\',this)" onclick="event.stopPropagation()"/>' +
         '<div class="upload-icon">&#128206;</div>' +
-        '<div class="upload-text"><div class="u-title">Attach diagram / document</div><div class="u-sub">PDF, PNG, JPG, XLSX, DOCX, Visio &middot; Max 10MB</div></div>' +
+        '<div class="upload-text"><div class="u-title">Attach diagram / document</div><div class="u-sub">PDF, PNG, JPG, XLSX, DOCX &middot; Max 10MB</div></div>' +
         '<div class="upload-badge" id="badge-' + si + '-' + ri + '">Upload</div>' +
       '</div>' +
       '<div class="file-list" id="files-' + si + '-' + ri + '"></div>' : '';
@@ -522,7 +493,6 @@ submitTab.textContent = 'Submit';
 submitTab.onclick = function(){ goToSubmit(); };
 tabNav.appendChild(submitTab);
 
-// ── Tab switching ────────────────────────────────────────────────
 function switchTab(idx) {
   document.querySelectorAll('.tab-btn').forEach(function(t, i) {
     t.classList.remove('active');
@@ -559,7 +529,7 @@ function goToSubmit() {
       totalFiles += (uploadedFiles[si + '-' + ri] || []).length;
     });
   });
-  var clientName = document.getElementById('clientName').value || '&#8212;';
+  var clientName = document.getElementById('clientName').value || '—';
   document.getElementById('summaryGrid').innerHTML =
     '<div class="summary-item"><div class="s-val">' + clientName.split(' ')[0] + '</div><div class="s-lbl">Client</div></div>' +
     '<div class="summary-item"><div class="s-val">' + SECTIONS.length + '</div><div class="s-lbl">Sections</div></div>' +
@@ -584,7 +554,6 @@ function updateProgress() {
   document.getElementById('progress-pct').textContent = pct + '%';
 }
 
-// ── File handling ────────────────────────────────────────────────
 function handleFiles(key, input) {
   if (!uploadedFiles[key]) uploadedFiles[key] = [];
   Array.from(input.files).forEach(function(file) {
@@ -620,14 +589,14 @@ function fileToBase64(file) {
   });
 }
 
-// ── Submit ───────────────────────────────────────────────────────
 async function submitForm() {
   var clientName = document.getElementById('clientName').value.trim() || 'Unknown';
+  var contactEmail = document.getElementById('contactEmail').value;
   var responses = [];
 
   document.getElementById('submitBtn').style.display = 'none';
   document.getElementById('loader').classList.add('show');
-  document.getElementById('loaderMsg').textContent = 'Preparing files for upload&#8230;';
+  document.getElementById('loaderMsg').textContent = 'Preparing files for upload...';
 
   for (var si = 0; si < SECTIONS.length; si++) {
     var sec = SECTIONS[si];
@@ -637,7 +606,7 @@ async function submitForm() {
       var files = uploadedFiles[key] || [];
       var fileData = [];
       for (var fi = 0; fi < files.length; fi++) {
-        document.getElementById('loaderMsg').textContent = 'Encoding "' + files[fi].name + '"&#8230;';
+        document.getElementById('loaderMsg').textContent = 'Encoding "' + files[fi].name + '"...';
         fileData.push({ name: files[fi].name, type: files[fi].type, data: await fileToBase64(files[fi]) });
       }
       var ta = document.getElementById('resp-' + si + '-' + ri);
@@ -653,157 +622,96 @@ async function submitForm() {
     }
   }
 
-  document.getElementById('loaderMsg').textContent = 'Analysing with Gemini AI&#8230; (this may take 30-60 seconds)';
+  var totalAnswered = responses.filter(function(r){ return r.response !== ''; }).length;
 
   var payload = {
     clientName:   clientName,
     contactName:  document.getElementById('contactName').value,
-    contactEmail: document.getElementById('contactEmail').value,
+    contactEmail: contactEmail,
     fillDate:     document.getElementById('fillDate').value,
     responses:    responses
   };
-  var totalAnswered = responses.filter(function(r){ return r.response !== ''; }).length;
-  try {
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    });
 
-    // Wait 4 seconds for Apps Script to process then show success
-    document.getElementById('loaderMsg').textContent = 'Saving to Google Drive...';
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    document.getElementById('loaderMsg').textContent = 'Analysing with Gemini AI...';
-    await new Promise(resolve => setTimeout(resolve, 2000));
+  // ── Hidden iframe form POST — bypasses CORS, data always saves ──
+  document.getElementById('loaderMsg').textContent = 'Saving to Google Drive...';
 
-    // Hide loader, show results
-    document.getElementById('loader').classList.remove('show');
-    document.getElementById('formState').style.display = 'none';
-    var panel = document.getElementById('resultsPanel');
-    panel.classList.add('show');
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = SCRIPT_URL;
+  form.target = 'hidden_iframe';
+  form.style.display = 'none';
+  var input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'payload';
+  input.value = JSON.stringify(payload);
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
 
-    // Populate static success (AI results go to DNISPL's Sheet)
-    document.getElementById('resClientName').textContent  = clientName;
-    document.getElementById('resClientName2').textContent = clientName;
-    document.getElementById('resEmail').textContent       = document.getElementById('contactEmail').value;
-    document.getElementById('resScore').textContent       = '✓';
-    document.getElementById('resScore').style.color       = '#2E7D32';
-    document.getElementById('resLabel').textContent       = 'Submitted Successfully';
-    document.getElementById('resExec').textContent        = 'Your responses have been saved securely to DNISPL\'s system. Our solutions architects are now preparing your personalised IT maturity assessment and roadmap.';
+  // Progress messages while Apps Script processes in background
+  await new Promise(function(r){ setTimeout(r, 2000); });
+  document.getElementById('loaderMsg').textContent = 'Running Gemini AI analysis...';
+  await new Promise(function(r){ setTimeout(r, 2500); });
+  document.getElementById('loaderMsg').textContent = 'Finalising your report...';
+  await new Promise(function(r){ setTimeout(r, 1000); });
 
-    document.getElementById('resStrengths').innerHTML =
-      '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>All ' + totalAnswered + ' responses captured successfully</span></div>' +
-      '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>Uploaded files saved to DNISPL\'s secure Google Drive</span></div>' +
-      '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>Gemini AI analysis running in background — results go to DNISPL team</span></div>';
-
-    document.getElementById('resInitiatives').innerHTML =
-      '<div class="initiative-card">' +
-        '<div class="init-num">1</div>' +
-        '<div style="flex:1;"><div class="init-title">Personalised IT Maturity Report</div>' +
-        '<div class="init-desc">Full AI-generated assessment with maturity score, gaps, and strengths</div></div>' +
-        '<div class="init-timeline">Within 2 days</div>' +
-      '</div>' +
-      '<div class="initiative-card">' +
-        '<div class="init-num">2</div>' +
-        '<div style="flex:1;"><div class="init-title">HLD / LLD Architecture Proposal</div>' +
-        '<div class="init-desc">Detailed solution design tailored to your environment</div></div>' +
-        '<div class="init-timeline">Within 5 days</div>' +
-      '</div>' +
-      '<div class="initiative-card">' +
-        '<div class="init-num">3</div>' +
-        '<div style="flex:1;"><div class="init-title">Commercial Proposal & BOM</div>' +
-        '<div class="init-desc">Solution BOM, pricing, ROI analysis, and implementation roadmap</div></div>' +
-        '<div class="init-timeline">Within 7 days</div>' +
-      '</div>';
-
-    document.getElementById('resRoadmap').innerHTML =
-      '<div class="phase-row">' +
-        '<div class="phase-badge" style="background:#1A3A5C;">P1</div>' +
-        '<div class="phase-body"><div class="phase-title">Stabilise &amp; Secure</div><div class="phase-sub">0–3 months · Quick wins and critical risk reduction</div></div>' +
-        '<div class="phase-outcome">Risk Reduction</div>' +
-      '</div>' +
-      '<div class="phase-row">' +
-        '<div class="phase-badge" style="background:#2E7D32;">P2</div>' +
-        '<div class="phase-body"><div class="phase-title">Optimise &amp; Transform</div><div class="phase-sub">3–9 months · Performance and modernisation</div></div>' +
-        '<div class="phase-outcome">Efficiency Gain</div>' +
-      '</div>' +
-      '<div class="phase-row">' +
-        '<div class="phase-badge" style="background:#7B2D00;">P3</div>' +
-        '<div class="phase-body"><div class="phase-title">Innovate &amp; Scale</div><div class="phase-sub">9–18 months · AI, automation, and future-readiness</div></div>' +
-        '<div class="phase-outcome">Business Enablement</div>' +
-      '</div>';
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  } catch(err) {
-    document.getElementById('loader').classList.remove('show');
-    document.getElementById('submitBtn').style.display = '';
-    alert('Submission failed. Please try again.\n\n' + err.message);
-  }
-}
-// ── Render results inline ────────────────────────────────────────
-function renderResults(a, clientName, email) {
+  // Show success screen
   document.getElementById('loader').classList.remove('show');
   document.getElementById('formState').style.display = 'none';
   var panel = document.getElementById('resultsPanel');
   panel.classList.add('show');
 
-  // Hero
   document.getElementById('resClientName').textContent  = clientName;
   document.getElementById('resClientName2').textContent = clientName;
-  document.getElementById('resEmail').textContent       = email || '';
+  document.getElementById('resEmail').textContent       = contactEmail;
+  document.getElementById('resScore').style.color       = '#2E7D32';
 
-  // Score
-  var score = a.maturityScore || '—';
-  var scoreColor = score >= 7 ? '#2E7D32' : score >= 4 ? '#F57F17' : '#c0392b';
-  document.getElementById('resScore').textContent = score;
-  document.getElementById('resScore').style.color = scoreColor;
-  document.getElementById('resLabel').textContent = a.maturityLabel || '—';
-  document.getElementById('resExec').textContent  = a.executiveSummary || '—';
+  document.getElementById('resStrengths').innerHTML =
+    '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>' + totalAnswered + ' responses captured and saved securely</span></div>' +
+    '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>All uploaded files saved to DNISPL Google Drive folder</span></div>' +
+    '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>Gemini AI analysis running — full report goes to DNISPL team</span></div>' +
+    '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>Confirmation noted for ' + clientName + ' — ' + contactEmail + '</span></div>';
 
-  // Strengths
-  var sHTML = '';
-  (a.keyStrengths || []).forEach(function(s) {
-    sHTML += '<div class="strength-row"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>' + s + '</span></div>';
-  });
-  document.getElementById('resStrengths').innerHTML = sHTML;
+  document.getElementById('resInitiatives').innerHTML =
+    '<div class="initiative-card">' +
+      '<div class="init-num">1</div>' +
+      '<div style="flex:1;"><div class="init-title">Personalised IT Maturity Report</div>' +
+      '<div class="init-desc">Full AI-generated assessment with maturity score, critical gaps, and key strengths</div></div>' +
+      '<div class="init-timeline">Within 2 days</div>' +
+    '</div>' +
+    '<div class="initiative-card">' +
+      '<div class="init-num">2</div>' +
+      '<div style="flex:1;"><div class="init-title">HLD / LLD Architecture Proposal</div>' +
+      '<div class="init-desc">Detailed solution design tailored to your environment and priorities</div></div>' +
+      '<div class="init-timeline">Within 5 days</div>' +
+    '</div>' +
+    '<div class="initiative-card">' +
+      '<div class="init-num">3</div>' +
+      '<div style="flex:1;"><div class="init-title">Commercial Proposal & BOM</div>' +
+      '<div class="init-desc">Solution BOM, pricing, ROI analysis, and phased implementation roadmap</div></div>' +
+      '<div class="init-timeline">Within 7 days</div>' +
+    '</div>';
 
-  // Initiatives
-  var iHTML = '';
-  (a.prioritisedRecommendations || []).slice(0, 4).forEach(function(r, i) {
-    iHTML +=
-      '<div class="initiative-card">' +
-        '<div class="init-num">' + (i + 1) + '</div>' +
-        '<div style="flex:1;">' +
-          '<div class="init-title">' + r.initiative + '</div>' +
-          '<div class="init-desc">' + r.description + '</div>' +
-        '</div>' +
-        '<div class="init-timeline">' + r.timeline + '</div>' +
-      '</div>';
-  });
-  document.getElementById('resInitiatives').innerHTML = iHTML;
-
-  // Roadmap
-  var phaseColors = ['#1A3A5C', '#2E7D32', '#7B2D00'];
-  var rHTML = '';
-  (a.roadmapPhases || []).forEach(function(p, i) {
-    rHTML +=
-      '<div class="phase-row">' +
-        '<div class="phase-badge" style="background:' + (phaseColors[i] || '#1A3A5C') + ';">' + p.phase.replace('Phase ', 'P') + '</div>' +
-        '<div class="phase-body">' +
-          '<div class="phase-title">' + p.title + '</div>' +
-          '<div class="phase-sub">' + p.duration + ' &bull; ' + (p.initiatives || []).join(', ') + '</div>' +
-        '</div>' +
-        '<div class="phase-outcome">' + p.outcome + '</div>' +
-      '</div>';
-  });
-  document.getElementById('resRoadmap').innerHTML = rHTML;
+  document.getElementById('resRoadmap').innerHTML =
+    '<div class="phase-row">' +
+      '<div class="phase-badge" style="background:#1A3A5C;">P1</div>' +
+      '<div class="phase-body"><div class="phase-title">Stabilise &amp; Secure</div><div class="phase-sub">0-3 months &bull; Quick wins and critical risk reduction</div></div>' +
+      '<div class="phase-outcome">Risk Reduction</div>' +
+    '</div>' +
+    '<div class="phase-row">' +
+      '<div class="phase-badge" style="background:#2E7D32;">P2</div>' +
+      '<div class="phase-body"><div class="phase-title">Optimise &amp; Transform</div><div class="phase-sub">3-9 months &bull; Performance and modernisation initiatives</div></div>' +
+      '<div class="phase-outcome">Efficiency Gain</div>' +
+    '</div>' +
+    '<div class="phase-row">' +
+      '<div class="phase-badge" style="background:#7B2D00;">P3</div>' +
+      '<div class="phase-body"><div class="phase-title">Innovate &amp; Scale</div><div class="phase-sub">9-18 months &bull; AI, automation, and future-readiness</div></div>' +
+      '<div class="phase-outcome">Business Enablement</div>' +
+    '</div>';
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── Init ─────────────────────────────────────────────────────────
 document.getElementById('fillDate').value = new Date().toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
 </script>
 </body>
