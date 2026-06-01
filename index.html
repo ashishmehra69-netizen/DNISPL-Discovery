@@ -237,64 +237,48 @@
         <button class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="font-size:15px;padding:13px 36px;">Submit to DNISPL Team →</button>
         <p style="margin-top:12px;font-size:12px;color:#bbb;">All data is transmitted securely and treated as strictly confidential.</p>
       </div>
-      <!-- Rich client-facing summary after submission -->
-      <div class="success-state" id="successState">
-
-        <!-- Header -->
-        <div style="background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:32px;margin-bottom:24px;text-align:center;">
-          <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#2E7D32,#4caf50);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:36px;animation:popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;">✓</div>
-          <h2 style="font-family:'Playfair Display',serif;color:white;font-size:28px;margin-bottom:8px;">Thank You, <span id="summaryClientName" style="color:#C9A84C;">—</span>!</h2>
-          <p style="color:rgba(255,255,255,0.6);font-size:14px;max-width:480px;margin:0 auto;line-height:1.6;">Your discovery responses have been received. Our team is analysing your IT environment and will present a detailed roadmap shortly.</p>
+      <div class="results-panel" id="resultsPanel">
+        <div class="res-hero">
+          <div class="res-check">&#10003;</div>
+          <h2>Thank You, <span id="resClientName" style="color:#C9A84C;">&#8212;</span>!</h2>
+          <p>Your discovery responses have been saved to DNISPL's secure system. Our team will present your full IT maturity roadmap shortly.</p>
         </div>
-
-        <!-- Maturity score -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;text-align:left;">
-          <div style="background:#f8fafc;border:1px solid #dde4ef;border-radius:12px;padding:20px;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">IT Maturity Score</div>
-            <div style="display:flex;align-items:flex-end;gap:8px;margin-bottom:10px;">
-              <div id="summaryScore" style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:#0D1B2A;line-height:1;">—</div>
-              <div style="font-size:14px;color:#6b7280;margin-bottom:8px;">/ 10</div>
-            </div>
-            <div id="summaryMaturityLabel" style="display:inline-block;background:#EAF1FB;color:#1A3A5C;font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;">—</div>
+        <div class="res-grid">
+          <div class="res-card">
+            <div class="res-label">IT Maturity Score</div>
+            <div id="resScore" style="font-family:'Playfair Display',serif;font-size:52px;font-weight:700;line-height:1;margin-bottom:8px;">&#10003;</div>
+            <div style="color:#6b7280;font-size:13px;margin-bottom:6px;" id="resScoreSub">Saved to Google Drive</div>
+            <div class="res-tag" id="resLabel">Submitted Successfully</div>
           </div>
-          <div style="background:#f8fafc;border:1px solid #dde4ef;border-radius:12px;padding:20px;">
-            <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">Assessment Summary</div>
-            <p id="summaryExec" style="font-size:13px;color:#374151;line-height:1.6;">—</p>
+          <div class="res-card">
+            <div class="res-label">What Happens Next</div>
+            <p id="resExec" style="font-size:13px;color:#374151;line-height:1.6;">Our solutions architects are now preparing your personalised IT maturity assessment, architecture recommendations, and commercial roadmap.</p>
           </div>
         </div>
-
-        <!-- Key strengths -->
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px;margin-bottom:20px;text-align:left;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#2E7D32;margin-bottom:12px;">✅ Your Key Strengths</div>
-          <div id="summaryStrengths"></div>
+        <div class="res-section" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+          <div class="res-section-title" style="color:#2E7D32;">&#9989; Confirmed &#8212; Your Data is Safe</div>
+          <div id="resStrengths"></div>
         </div>
-
-        <!-- Top initiatives -->
-        <div style="background:#EAF1FB;border:1px solid #bdd0e8;border-radius:12px;padding:20px;margin-bottom:20px;text-align:left;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1A3A5C;margin-bottom:12px;">🎯 Top Recommended Initiatives</div>
-          <div id="summaryInitiatives"></div>
+        <div class="res-section" style="background:#EAF1FB;border:1px solid #bdd0e8;">
+          <div class="res-section-title" style="color:#1A3A5C;">&#127919; What DNISPL Will Deliver</div>
+          <div id="resInitiatives"></div>
         </div>
-
-        <!-- Roadmap preview -->
-        <div style="background:#fdf8ee;border:1px solid #e8d8a0;border-radius:12px;padding:20px;margin-bottom:24px;text-align:left;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;">🗺️ Your Proposed Roadmap</div>
-          <div id="summaryRoadmap" style="display:grid;gap:10px;"></div>
+        <div class="res-section" style="background:#fdf8ee;border:1px solid #e8d8a0;">
+          <div class="res-section-title" style="color:#C9A84C;">&#128506; Your Proposed Roadmap</div>
+          <div id="resRoadmap"></div>
         </div>
-
-        <!-- DNISPL next step banner -->
-        <div style="background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:28px;text-align:center;">
-          <div style="font-size:28px;margin-bottom:12px;">📊</div>
-          <h3 style="font-family:'Playfair Display',serif;color:white;font-size:20px;margin-bottom:10px;">DNISPL will present a detailed roadmap</h3>
-          <p style="color:rgba(255,255,255,0.6);font-size:13px;max-width:460px;margin:0 auto 16px;line-height:1.7;">Our solutions architects are preparing a comprehensive presentation covering architecture designs, solution recommendations, implementation plan, and commercial proposal — tailored specifically for <span id="summaryClientName2" style="color:#C9A84C;">your organisation</span>.</p>
-          <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px;">
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> HLD / LLD Architecture</div>
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> Solution BOM & Pricing</div>
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> Implementation Roadmap</div>
-            <div style="color:rgba(255,255,255,0.7);font-size:12px;display:flex;align-items:center;gap:6px;"><span style="color:#C9A84C;">●</span> ROI Analysis</div>
+        <div class="res-banner">
+          <div style="font-size:32px;margin-bottom:12px;">&#128202;</div>
+          <h3>DNISPL will present a detailed roadmap</h3>
+          <p>Our solutions architects are preparing a comprehensive presentation covering HLD/LLD architecture, solution BOM &amp; pricing, implementation plan, and ROI analysis &#8212; tailored specifically for <span id="resClientName2" style="color:#C9A84C;">your organisation</span>.</p>
+          <div class="banner-pills">
+            <div class="banner-pill">&#9679; HLD / LLD Architecture</div>
+            <div class="banner-pill">&#9679; Solution BOM &amp; Pricing</div>
+            <div class="banner-pill">&#9679; Implementation Roadmap</div>
+            <div class="banner-pill">&#9679; ROI Analysis</div>
           </div>
-          <p style="color:rgba(255,255,255,0.4);font-size:12px;margin-top:20px;">Expect to hear from us within 2 business days · <span id="summaryEmail" style="color:#C9A84C;"></span></p>
+          <p style="color:rgba(255,255,255,0.4);font-size:12px;">Expect to hear from us within 2 business days &middot; <span id="resEmail" style="color:#C9A84C;"></span></p>
         </div>
-
       </div>
     </div>
   </div>
@@ -662,12 +646,14 @@ async function submitForm() {
   document.getElementById('loaderMsg').textContent = 'Saving to Google Drive…';
 
   try {
-    // Step 1: Save data + trigger Gemini — use text/plain to avoid CORS preflight
-    // Apps Script reads this via e.postData.contents
+    // Send as URL-encoded form data — Apps Script reads via e.parameter.payload reliably
+    const formData = new URLSearchParams();
+    formData.append('payload', JSON.stringify(payload));
+
     const res = await fetch(SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
     });
 
     document.getElementById('loaderMsg').textContent = 'Running Gemini AI analysis…';
