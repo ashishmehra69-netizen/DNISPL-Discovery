@@ -197,9 +197,6 @@
 </div>
 
 <!-- Hidden form that posts directly to Apps Script (no CORS, browser navigates to result page) -->
-<form id="hiddenForm" method="POST" target="_self" style="display:none;">
-  <input type="hidden" id="hiddenPayload" name="payload"/>
-</form>
 
 <script>
 var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhcxb1eyMVayb2cjhkRZtmB7IiOwC8woafMYMm7nwvHHS7r2lCuaypNJASo8c-0P50OQ/exec";
@@ -464,7 +461,7 @@ async function submitForm(){
 
   document.getElementById('submitBtn').style.display='none';
   document.getElementById('loader').classList.add('show');
-  document.getElementById('loaderMsg').textContent='Preparing your submission&#8230;';
+  document.getElementById('loaderMsg').textContent='Preparing your submission...';
 
   var responses=[];
   for(var si=0;si<SECTIONS.length;si++){
@@ -475,7 +472,7 @@ async function submitForm(){
       var files=uploadedFiles[key]||[];
       var fileData=[];
       for(var fi=0;fi<files.length;fi++){
-        document.getElementById('loaderMsg').textContent='Encoding "'+files[fi].name+'"&#8230;';
+        document.getElementById('loaderMsg').textContent='Encoding "'+files[fi].name+'"...';
         fileData.push({name:files[fi].name,type:files[fi].type,data:await fileToBase64(files[fi])});
       }
       var ta=document.getElementById('resp-'+si+'-'+ri);
@@ -497,14 +494,107 @@ async function submitForm(){
     responses:responses
   };
 
-  document.getElementById('loaderMsg').textContent='Saving to Google Drive &amp; running AI analysis&#8230;';
+  document.getElementById('loaderMsg').textContent='Saving to Google Drive & running AI analysis... (30-60 sec)';
 
-  // Set the hidden form payload and submit directly to Apps Script
-  // The browser navigates to Apps Script which returns the results HTML page
-  // This is the ONLY approach that bypasses CORS completely
-  document.getElementById('hiddenPayload').value = JSON.stringify(payload);
-  document.getElementById('hiddenForm').action = SCRIPT_URL;
-  document.getElementById('hiddenForm').submit();
+  try {
+    var result = await fetch('/api/submit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    });
+    var json = await result.json();
+    if(json.success && json.analysis){
+      renderResults(json.analysis, clientName, document.getElementById('contactEmail').value);
+    } else {
+      throw new Error(json.error || 'Submission failed');
+    }
+  } catch(err){
+    document.getElementById('loader').classList.remove('show');
+    document.getElementById('submitBtn').style.display='';
+    alert('Submission failed. Please try again.\n\n'+err.message);
+  }
+}
+
+function renderResults(a, clientName, email){
+  document.getElementById('loader').classList.remove('show');
+  document.getElementById('preSubmit').style.display='none';
+
+  var score=a.maturityScore||'-';
+  var scoreColor=score>=7?'#2E7D32':score>=4?'#F57F17':'#c0392b';
+
+  var strengthsHTML=(a.keyStrengths||[]).map(function(s){
+    return '<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f0f0f0;font-size:14px;color:#374151;"><span style="color:#2E7D32;font-size:16px;">&#10003;</span><span>'+s+'</span></div>';
+  }).join('');
+
+  var gapsHTML=(a.criticalGaps||[]).map(function(g){
+    var rc=g.risk==='Critical'?'#dc2626':g.risk==='High'?'#ea580c':'#d97706';
+    return '<div style="background:white;border:1px solid #fee2e2;border-radius:10px;padding:14px;margin-bottom:8px;">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">'
+      +'<div><div style="font-weight:700;color:#1e293b;margin-bottom:4px;">'+g.area+' — '+g.gap+'</div>'
+      +'<div style="font-size:13px;color:#6b7280;">'+g.recommendation+'</div></div>'
+      +'<span style="background:'+rc+'22;color:'+rc+';padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;">'+g.risk+'</span>'
+      +'</div></div>';
+  }).join('');
+
+  var initiativesHTML=(a.prioritisedRecommendations||[]).slice(0,5).map(function(r,i){
+    return '<div style="background:white;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;">'
+      +'<div style="background:#1A3A5C;color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;">'+(i+1)+'</div>'
+      +'<div style="flex:1;"><div style="font-weight:700;color:#1A3A5C;margin-bottom:4px;">'+r.initiative+'</div>'
+      +'<div style="font-size:13px;color:#6b7280;">'+r.description+'</div></div>'
+      +'<div style="background:#e0f2fe;color:#0369a1;padding:3px 10px;border-radius:20px;font-size:12px;white-space:nowrap;">'+r.timeline+'</div>'
+      +'</div>';
+  }).join('');
+
+  var phaseColors=['#1A3A5C','#2E7D32','#7B2D00'];
+  var roadmapHTML=(a.roadmapPhases||[]).map(function(p,i){
+    return '<div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;">'
+      +'<div style="background:'+phaseColors[i]+';color:white;border-radius:8px;padding:7px 12px;font-weight:700;font-size:12px;white-space:nowrap;">'+p.phase.replace('Phase ','P')+'</div>'
+      +'<div style="flex:1;background:#f8fafc;border-radius:8px;padding:12px;">'
+      +'<div style="font-weight:700;color:#1e293b;">'+p.title+'</div>'
+      +'<div style="font-size:12px;color:#6b7280;margin-top:3px;">'+p.duration+' &bull; '+(p.initiatives||[]).join(', ')+'</div></div>'
+      +'<div style="background:#f0fdf4;color:#166534;padding:5px 12px;border-radius:8px;font-size:12px;white-space:nowrap;">'+p.outcome+'</div>'
+      +'</div>';
+  }).join('');
+
+  var div=document.createElement('div');
+  div.innerHTML=''
+    +'<div style="background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:32px;margin-bottom:20px;text-align:center;">'
+    +'<div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#2E7D32,#4caf50);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:30px;">&#10003;</div>'
+    +'<h2 style="font-family:\'Playfair Display\',serif;color:white;font-size:26px;margin-bottom:8px;">Thank You, <span style="color:#C9A84C;">'+clientName+'</span>!</h2>'
+    +'<p style="color:rgba(255,255,255,0.6);font-size:13px;">Your IT discovery has been analysed. Here is your personalised assessment.</p>'
+    +'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">'
+    +'<div style="background:#f8fafc;border:1px solid #dde4ef;border-radius:12px;padding:20px;text-align:center;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">IT Maturity Score</div>'
+    +'<div style="font-family:\'Playfair Display\',serif;font-size:52px;font-weight:700;color:'+scoreColor+';">'+score+'</div>'
+    +'<div style="color:#6b7280;font-size:13px;margin-bottom:8px;">out of 10</div>'
+    +'<span style="background:'+scoreColor+'22;color:'+scoreColor+';font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;">'+a.maturityLabel+'</span>'
+    +'</div>'
+    +'<div style="background:#f8fafc;border:1px solid #dde4ef;border-radius:12px;padding:20px;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b7280;margin-bottom:10px;">Executive Summary</div>'
+    +'<p style="font-size:13px;color:#374151;line-height:1.7;">'+a.executiveSummary+'</p>'
+    +'</div></div>'
+    +'<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px;margin-bottom:16px;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#2E7D32;margin-bottom:12px;">&#9989; Key Strengths</div>'
+    +strengthsHTML+'</div>'
+    +'<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:20px;margin-bottom:16px;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#dc2626;margin-bottom:12px;">&#9888; Critical Gaps</div>'
+    +gapsHTML+'</div>'
+    +'<div style="background:#EAF1FB;border:1px solid #bdd0e8;border-radius:12px;padding:20px;margin-bottom:16px;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1A3A5C;margin-bottom:12px;">&#127919; Top Recommendations</div>'
+    +initiativesHTML+'</div>'
+    +'<div style="background:#fdf8ee;border:1px solid #e8d8a0;border-radius:12px;padding:20px;margin-bottom:16px;">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C9A84C;margin-bottom:12px;">&#128506; 18-Month Roadmap</div>'
+    +roadmapHTML+'</div>'
+    +'<div style="background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-radius:14px;padding:28px;text-align:center;">'
+    +'<div style="font-size:32px;margin-bottom:12px;">&#128202;</div>'
+    +'<h3 style="font-family:\'Playfair Display\',serif;color:white;font-size:20px;margin-bottom:10px;">DNISPL will present a detailed roadmap</h3>'
+    +'<p style="color:rgba(255,255,255,0.6);font-size:13px;max-width:460px;margin:0 auto 16px;line-height:1.7;">Our solutions architects are preparing HLD/LLD architecture, solution BOM &amp; pricing, and ROI analysis for <span style="color:#C9A84C;">'+clientName+'</span>.</p>'
+    +'<p style="color:rgba(255,255,255,0.4);font-size:12px;">Expect to hear from us within 2 business days &middot; <span style="color:#C9A84C;">'+email+'</span></p>'
+    +'</div>';
+
+  document.getElementById('submitCard').appendChild(div);
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 document.getElementById('fillDate').value=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
