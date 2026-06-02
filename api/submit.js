@@ -1,5 +1,5 @@
 // api/submit.js
-// Vercel serverless proxy — forwards to Apps Script server-side (no CORS)
+const https = require('https');
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -12,18 +12,29 @@ module.exports = async function handler(req, res) {
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhcxb1eyMVayb2cjhkRZtmB7IiOwC8woafMYMm7nwvHHS7r2lCuaypNJASo8c-0P50OQ/exec";
 
   try {
-    const body = JSON.stringify(req.body);
-    console.log('Forwarding to Apps Script, payload size:', body.length);
+    // Read raw body from request stream
+    const rawBody = await new Promise((resolve, reject) => {
+      let body = '';
+      req.on('data', chunk => { body += chunk.toString(); });
+      req.on('end', () => resolve(body));
+      req.on('error', reject);
+    });
 
+    console.log('Raw body size:', rawBody.length);
+
+    // Validate it's JSON
+    JSON.parse(rawBody); // will throw if invalid
+
+    // Forward to Apps Script
     const gasResponse = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: body,
+      body: rawBody,
       redirect: 'follow'
     });
 
     const text = await gasResponse.text();
-    console.log('Apps Script response:', text.substring(0, 300));
+    console.log('GAS response preview:', text.substring(0, 200));
 
     let data;
     try {
@@ -31,7 +42,7 @@ module.exports = async function handler(req, res) {
     } catch(e) {
       return res.status(200).json({
         success: false,
-        error: 'Apps Script response was not JSON: ' + text.substring(0, 200)
+        error: 'Apps Script returned non-JSON: ' + text.substring(0, 300)
       });
     }
 
